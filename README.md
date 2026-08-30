@@ -50,6 +50,8 @@ Render a standalone human-review page next to the generated overlays:
 - Requests human approval for a material transition and seals the report.
 - Renders hash-addressed review overlays without modifying source frames.
 - Escapes report data and renders a standalone decision-and-evidence review page.
+- Constrains the explanation layer to known frame ids and the bounded OpenCV
+  review action; unknown claims or unapproved actions fail closed.
 - Performs no network, cloud, account, billing, or external write.
 
 ## Next technical boundary
@@ -67,7 +69,7 @@ been deployed, connected to API Gateway, or exercised against a real AWS account
 
 ## Verified result — 2026-08-31
 
-The isolated spike environment reported OpenCV `5.0.0`; all twenty-two unit tests
+The isolated spike environment reported OpenCV `5.0.0`; all twenty-six unit tests
 passed. A 20-frame, 10 FPS synthetic black-to-white video produced exactly one
 evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
 one `(0, 0, 160, 100)` region, and distinct SHA-256 hashes for the previous and
@@ -117,3 +119,9 @@ are engineering gates for the spike, not claims of real-world precision or recal
 The standalone review HTML was rendered in headless Chrome at 1280 x 1200 and
 visually checked. It showed the decision reason, four-region overlay, exact frame
 hashes, and report receipt without clipping. The screenshot remained in `/tmp`.
+
+The bounded explanation layer was integrated into the sealed report. On the
+15-frame H.264 sample it cited only frame 1, summarized three extracted regions
+and a `0.174708` maximum change, and preserved the policy-selected
+`seal_evidence_for_agent_summary` action. Tests reject unknown frame citations
+and any recommendation that differs from the bounded plan.

@@ -13,6 +13,12 @@ def sample_report() -> dict[str, object]:
             "reason": "Material visual transition.",
             "triggering_frames": [3],
         },
+        "explanation": {
+            "summary": "One cited visual transition.",
+            "cited_frame_indices": [3],
+            "recommended_action": "request_human_approval",
+            "explanation_sha256": "e" * 64,
+        },
         "evidence_cards": [
             {
                 "frame_index": 3,
@@ -38,6 +44,7 @@ class ReportUiTest(unittest.TestCase):
         rendered = render_report_html(sample_report())
         self.assertIn("request_human_approval", rendered)
         self.assertIn("Material visual transition.", rendered)
+        self.assertIn("One cited visual transition.", rendered)
         self.assertIn("frame-000003.png", rendered)
         self.assertIn("a" * 64, rendered)
         self.assertIn("b" * 64, rendered)

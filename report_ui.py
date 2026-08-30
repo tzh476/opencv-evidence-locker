@@ -16,12 +16,18 @@ def _text(value: Any) -> str:
 def render_report_html(report: dict[str, Any]) -> str:
     receipt = report.get("receipt_sha256")
     plan = report.get("review_plan")
+    explanation = report.get("explanation")
     cards = report.get("evidence_cards")
     overlays = report.get("overlays", [])
     if not isinstance(receipt, str) or len(receipt) != 64:
         raise ValueError("report receipt_sha256 is required")
-    if not isinstance(plan, dict) or not isinstance(cards, list) or not isinstance(overlays, list):
-        raise ValueError("report must include review_plan, evidence_cards, and overlays")
+    if (
+        not isinstance(plan, dict)
+        or not isinstance(explanation, dict)
+        or not isinstance(cards, list)
+        or not isinstance(overlays, list)
+    ):
+        raise ValueError("report must include review_plan, explanation, evidence_cards, and overlays")
 
     overlay_by_frame = {
         item.get("frame_index"): item
@@ -72,6 +78,10 @@ img{{display:block;max-width:100%;height:auto;border-radius:8px;margin:12px 0}}
 <h2>{_text(plan.get('action'))}</h2>
 <p>{_text(plan.get('reason'))}</p>
 <p>Triggering frames: {_text(plan.get('triggering_frames', []))}</p>
+<h3>Bounded explanation</h3>
+<p>{_text(explanation.get('summary'))}</p>
+<p>Cited frames: {_text(explanation.get('cited_frame_indices', []))}</p>
+<code>explanation {_text(explanation.get('explanation_sha256'))}</code>
 </section>
 <section>{''.join(card_sections) or '<p>No material change evidence.</p>'}</section>
 <p class="receipt">Report receipt: {_text(receipt)}</p>

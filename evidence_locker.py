@@ -224,6 +224,9 @@ def analyze_video(
         reset_threshold=effective_reset_threshold,
     )
     plan = plan_review(cards)
+    from explanation_agent import as_report_block, explain
+
+    explanation = explain(cards, plan)
     overlays: list[dict[str, object]] = []
     if overlay_dir is not None:
         overlay_dir.mkdir(parents=True, exist_ok=True)
@@ -249,6 +252,7 @@ def analyze_video(
         "event_threshold": event_threshold,
         "reset_threshold": effective_reset_threshold,
         "evidence_cards": [asdict(card) for card in cards],
+        "explanation": as_report_block(explanation),
         "overlays": overlays,
         "review_plan": asdict(plan),
     }
