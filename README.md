@@ -51,9 +51,15 @@ human-review UI, an agent that explains only extracted evidence, an evaluation
 set with false-positive/false-negative measurements, and a meaningful bounded
 AWS component. Those pieces are not implemented or claimed here.
 
+`lambda_handler.py` now provides a locally tested boundary for the proposed AWS
+path: one S3 object event downloads a video, runs the same OpenCV evidence
+pipeline, and writes an AES-256 server-side-encrypted JSON report to a separate
+S3 prefix. It rejects batches and output-recursion events. The adapter has not
+been deployed, connected to API Gateway, or exercised against a real AWS account.
+
 ## Verified result — 2026-08-31
 
-The isolated spike environment reported OpenCV `5.0.0`; all twelve unit tests
+The isolated spike environment reported OpenCV `5.0.0`; all sixteen unit tests
 passed. A 20-frame, 10 FPS synthetic black-to-white video produced exactly one
 evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
 one `(0, 0, 160, 100)` region, and distinct SHA-256 hashes for the previous and
