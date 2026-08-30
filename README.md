@@ -19,6 +19,13 @@ python3 -m venv .venv
 .venv/bin/python -m unittest -v
 ```
 
+Build and test the Lambda-compatible arm64 container locally without pushing it:
+
+```bash
+docker build --platform linux/arm64 -t agentic-vision-evidence-locker:spike .
+docker run --rm --platform linux/arm64 --entrypoint python agentic-vision-evidence-locker:spike -m unittest -v
+```
+
 Analyze a local video without uploading it:
 
 ```bash
@@ -66,6 +73,8 @@ path: one S3 object event downloads a video, runs the same OpenCV evidence
 pipeline, and writes an AES-256 server-side-encrypted JSON report to a separate
 S3 prefix. It rejects batches and output-recursion events. The adapter has not
 been deployed, connected to API Gateway, or exercised against a real AWS account.
+
+![Bounded AWS architecture](architecture.svg)
 
 ## Verified result — 2026-08-31
 
@@ -125,3 +134,10 @@ The bounded explanation layer was integrated into the sealed report. On the
 and a `0.174708` maximum change, and preserved the policy-selected
 `seal_evidence_for_agent_summary` action. Tests reject unknown frame citations
 and any recommendation that differs from the bounded plan.
+
+The Lambda-compatible image was then built locally from
+`public.ecr.aws/lambda/python:3.13-arm64`. Inside that image, Python reported
+`aarch64`, OpenCV reported `5.0.0`, and all twenty-six tests passed again. The
+architecture SVG was rendered to a 1,200 x 620 PNG in headless Chrome and
+visually checked. No image was pushed to a registry and no AWS resource was
+created.

@@ -1,0 +1,6 @@
+__pycache__
+.venv
+*.pyc
+*.json
+*.mp4
+overlays
