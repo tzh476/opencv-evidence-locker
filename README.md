@@ -87,3 +87,22 @@ minimum area (`max(16px, 0.2% of the frame)`) and a tiny-speck regression test
 reduced that sample from dozens of boxes to four reviewable regions while
 preserving the main subject. The corrected overlay SHA-256 is
 `5acece4631ad46ccf4bca97d125a9ae1c26e6fc1d9577af85e822418c5e75ef9`.
+
+Three public `opencv_extra/5.x` videos with different sizes and metadata were
+then processed under OpenCV 5 without crashes or uploads:
+
+| Sample source SHA-256 | Frames | Events | Action |
+|---|---:|---:|---|
+| `4e28622467284da93f7575189c84f0e762b170bb7cf19667ca52929f93dcc238` | 125 | 1 | seal evidence |
+| `c433da3c2354a19324f606300753be7942cf3970e879e081bca749bd9041445c` | 15 | 1 | seal evidence |
+| `fbf61d51ea8a2d1218c4fb898c6b31acf661d578040dd964447532b1f66a6c77` | 54 | 2 | seal evidence |
+
+Repeating the 15-frame H.264 sample produced identical evidence cards and the
+same report receipt (`39584d0272d96679c591d87f1836fbe44e0635adc6e835b35b030a0686dc5ced`).
+The samples remain in `/tmp`; this repository records hashes and bounded results,
+not the media.
+
+Before any cloud deployment, the local gate is: all tests pass; the seeded
+positive/negative set has zero FP/FN; repeated input yields the same receipt;
+each public sample completes; and event density stays below 10% of frames. These
+are engineering gates for the spike, not claims of real-world precision or recall.
