@@ -3,7 +3,15 @@ import unittest
 import cv2
 import numpy as np
 
-from evidence_locker import EvidenceCard, analyze_frames, changed_regions, frame_sha256, plan_review, seal_report
+from evidence_locker import (
+    EvidenceCard,
+    analyze_frames,
+    changed_regions,
+    frame_sha256,
+    plan_review,
+    render_overlay,
+    seal_report,
+)
 from evaluate_synthetic import evaluate
 
 
@@ -102,6 +110,38 @@ class EvidenceLockerTest(unittest.TestCase):
             reset_threshold=0.005,
         )
         self.assertEqual(tuple(card.frame_index for card in cards), (1, 3))
+
+    def test_overlay_marks_regions_without_mutating_source(self) -> None:
+        source = self.black.copy()
+        card = EvidenceCard(
+            frame_index=1,
+            timestamp_ms=100,
+            change_score=0.1,
+            changed_regions=((20, 30, 40, 20),),
+            previous_sha256="a" * 64,
+            frame_sha256="b" * 64,
+        )
+        overlay = render_overlay(source, card)
+        self.assertTrue(np.array_equal(source, self.black))
+        self.assertEqual(tuple(overlay[30, 20]), (0, 0, 255))
+        self.assertFalse(np.array_equal(overlay, source))
+
+    def test_overlay_rejects_non_positive_region(self) -> None:
+        card = EvidenceCard(
+            frame_index=1,
+            timestamp_ms=100,
+            change_score=0.1,
+            changed_regions=((1, 1, 0, 2),),
+            previous_sha256="a" * 64,
+            frame_sha256="b" * 64,
+        )
+        with self.assertRaisesRegex(ValueError, "positive dimensions"):
+            render_overlay(self.black, card)
+
+    def test_tiny_speck_is_not_a_review_region(self) -> None:
+        changed = self.black.copy()
+        changed[50, 80] = 255
+        self.assertEqual(changed_regions(self.black, changed), ())
 
 
 if __name__ == "__main__":

@@ -22,7 +22,7 @@ python3 -m venv .venv
 Analyze a local video without uploading it:
 
 ```bash
-.venv/bin/python evidence_locker.py input.mp4 --output evidence.json
+.venv/bin/python evidence_locker.py input.mp4 --output evidence.json --overlay-dir overlays
 ```
 
 Run the deterministic four-scenario evaluation:
@@ -42,6 +42,7 @@ Run the deterministic four-scenario evaluation:
 - Rejects shape and dtype mismatches instead of silently normalizing evidence.
 - Fails closed into a rerun when a frame-level event has no reviewable region.
 - Requests human approval for a material transition and seals the report.
+- Renders hash-addressed review overlays without modifying source frames.
 - Performs no network, cloud, account, billing, or external write.
 
 ## Next technical boundary
@@ -59,7 +60,7 @@ been deployed, connected to API Gateway, or exercised against a real AWS account
 
 ## Verified result — 2026-08-31
 
-The isolated spike environment reported OpenCV `5.0.0`; all sixteen unit tests
+The isolated spike environment reported OpenCV `5.0.0`; all nineteen unit tests
 passed. A 20-frame, 10 FPS synthetic black-to-white video produced exactly one
 evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
 one `(0, 0, 160, 100)` region, and distinct SHA-256 hashes for the previous and
@@ -80,3 +81,9 @@ frames. Hysteresis and two regression tests reduced that to one card without
 disabling re-arming after a quiet frame. The corrected report receipt is
 `13a3d89482c0ea6f6ccd2082c1268fb46c383c8f1100565e7bddf7ad57c6c61c`.
 This single public sample proves the regression fix, not general accuracy.
+
+The first review overlay still contained many tiny contour boxes. An adaptive
+minimum area (`max(16px, 0.2% of the frame)`) and a tiny-speck regression test
+reduced that sample from dozens of boxes to four reviewable regions while
+preserving the main subject. The corrected overlay SHA-256 is
+`5acece4631ad46ccf4bca97d125a9ae1c26e6fc1d9577af85e822418c5e75ef9`.

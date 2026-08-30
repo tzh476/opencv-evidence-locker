@@ -65,7 +65,7 @@ def changed_regions(
     current: np.ndarray,
     *,
     pixel_threshold: int = 24,
-    min_area: int = 16,
+    min_area: int | None = None,
 ) -> tuple[tuple[int, int, int, int], ...]:
     _validate_frame(previous)
     _validate_frame(current)
@@ -73,6 +73,7 @@ def changed_regions(
         raise ValueError("frames must have identical shapes")
     if not 0 <= pixel_threshold <= 255:
         raise ValueError("pixel_threshold must be between 0 and 255")
+    min_area = max(16, round(previous.shape[0] * previous.shape[1] * 0.002)) if min_area is None else min_area
     if min_area < 1:
         raise ValueError("min_area must be positive")
 
@@ -170,6 +171,23 @@ def plan_review(cards: Iterable[EvidenceCard]) -> ReviewPlan:
     )
 
 
+def render_overlay(frame: np.ndarray, card: EvidenceCard) -> np.ndarray:
+    _validate_frame(frame)
+    overlay = frame.copy()
+    height, width = overlay.shape[:2]
+    for x, y, box_width, box_height in card.changed_regions:
+        if box_width < 1 or box_height < 1:
+            raise ValueError("changed regions must have positive dimensions")
+        x1 = max(0, min(width - 1, x))
+        y1 = max(0, min(height - 1, y))
+        x2 = max(0, min(width - 1, x + box_width - 1))
+        y2 = max(0, min(height - 1, y + box_height - 1))
+        cv2.rectangle(overlay, (x1, y1), (x2, y2), (0, 0, 255), thickness=2)
+    label = f"frame={card.frame_index} change={card.change_score:.6f}"
+    cv2.putText(overlay, label, (4, 16), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 255, 255), 1, cv2.LINE_AA)
+    return overlay
+
+
 def seal_report(report: dict[str, object]) -> str:
     canonical = json.dumps(report, separators=(",", ":"), sort_keys=True).encode()
     return hashlib.sha256(canonical).hexdigest()
@@ -180,6 +198,7 @@ def analyze_video(
     *,
     event_threshold: float = 0.02,
     reset_threshold: float | None = None,
+    overlay_dir: Path | None = None,
 ) -> dict[str, object]:
     capture = cv2.VideoCapture(str(path))
     if not capture.isOpened():
@@ -205,6 +224,21 @@ def analyze_video(
         reset_threshold=effective_reset_threshold,
     )
     plan = plan_review(cards)
+    overlays: list[dict[str, object]] = []
+    if overlay_dir is not None:
+        overlay_dir.mkdir(parents=True, exist_ok=True)
+        for card in cards:
+            filename = f"frame-{card.frame_index:06d}-{card.frame_sha256[:12]}.png"
+            output_path = overlay_dir / filename
+            if not cv2.imwrite(str(output_path), render_overlay(frames[card.frame_index], card)):
+                raise OSError(f"unable to write overlay: {output_path}")
+            overlays.append(
+                {
+                    "frame_index": card.frame_index,
+                    "filename": filename,
+                    "sha256": hashlib.sha256(output_path.read_bytes()).hexdigest(),
+                }
+            )
     report: dict[str, object] = {
         "schema_version": 1,
         "opencv_version": cv2.__version__,
@@ -215,6 +249,7 @@ def analyze_video(
         "event_threshold": event_threshold,
         "reset_threshold": effective_reset_threshold,
         "evidence_cards": [asdict(card) for card in cards],
+        "overlays": overlays,
         "review_plan": asdict(plan),
     }
     report["receipt_sha256"] = seal_report(report)
@@ -227,11 +262,13 @@ def main() -> None:
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--event-threshold", type=float, default=0.02)
     parser.add_argument("--reset-threshold", type=float)
+    parser.add_argument("--overlay-dir", type=Path)
     args = parser.parse_args()
     report = analyze_video(
         args.video,
         event_threshold=args.event_threshold,
         reset_threshold=args.reset_threshold,
+        overlay_dir=args.overlay_dir,
     )
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
 
