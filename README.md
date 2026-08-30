@@ -25,6 +25,12 @@ Analyze a local video without uploading it:
 .venv/bin/python evidence_locker.py input.mp4 --output evidence.json
 ```
 
+Run the deterministic four-scenario evaluation:
+
+```bash
+.venv/bin/python evaluate_synthetic.py
+```
+
 ## Spike acceptance criteria
 
 - Runs against `opencv-python==5.0.0.93`.
@@ -45,7 +51,7 @@ AWS component. Those pieces are not implemented or claimed here.
 
 ## Verified result — 2026-08-31
 
-The isolated spike environment reported OpenCV `5.0.0`; all nine unit tests
+The isolated spike environment reported OpenCV `5.0.0`; all ten unit tests
 passed. A 20-frame, 10 FPS synthetic black-to-white video produced exactly one
 evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
 one `(0, 0, 160, 100)` region, and distinct SHA-256 hashes for the previous and
@@ -53,3 +59,9 @@ current frames. The planner selected `request_human_approval`, and the canonical
 report receipt was `7fa0a95b5df55085182e0663c5968a38e8b1d647fef5e031308d278e82976d9c`.
 The generated video and JSON remained under `/tmp` and are not contest assets or
 external evidence.
+
+The seeded four-scenario evaluation covers no change, localized change,
+full-frame change, and low-amplitude noise. It currently reports two true
+positives, two true negatives, zero false positives, zero false negatives, and
+100% action selection accuracy. This is a smoke-sized synthetic evaluation, not
+evidence of production accuracy; licensed real-world samples are still needed.

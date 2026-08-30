@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 
 from evidence_locker import EvidenceCard, analyze_frames, changed_regions, frame_sha256, plan_review, seal_report
+from evaluate_synthetic import evaluate
 
 
 class EvidenceLockerTest(unittest.TestCase):
@@ -73,6 +74,12 @@ class EvidenceLockerTest(unittest.TestCase):
 
     def test_report_seal_is_order_independent(self) -> None:
         self.assertEqual(seal_report({"b": 2, "a": 1}), seal_report({"a": 1, "b": 2}))
+
+    def test_synthetic_evaluation_has_no_fp_or_fn(self) -> None:
+        report = evaluate()
+        self.assertEqual(report["false_positive"], 0)
+        self.assertEqual(report["false_negative"], 0)
+        self.assertEqual(report["action_accuracy"], 1.0)
 
 
 if __name__ == "__main__":
