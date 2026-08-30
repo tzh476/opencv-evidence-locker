@@ -36,6 +36,8 @@ Run the deterministic four-scenario evaluation:
 - Runs against `opencv-python==5.0.0.93`.
 - Emits no event for identical frames and completes without escalation.
 - Detects and deterministically orders multiple changed regions.
+- Uses hysteresis: an event must fall below a reset threshold before another
+  evidence card can fire, preventing continuous-motion event floods.
 - Hashes the exact frame shape, dtype, and bytes.
 - Rejects shape and dtype mismatches instead of silently normalizing evidence.
 - Fails closed into a rerun when a frame-level event has no reviewable region.
@@ -51,7 +53,7 @@ AWS component. Those pieces are not implemented or claimed here.
 
 ## Verified result — 2026-08-31
 
-The isolated spike environment reported OpenCV `5.0.0`; all ten unit tests
+The isolated spike environment reported OpenCV `5.0.0`; all twelve unit tests
 passed. A 20-frame, 10 FPS synthetic black-to-white video produced exactly one
 evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
 one `(0, 0, 160, 100)` region, and distinct SHA-256 hashes for the previous and
@@ -65,3 +67,10 @@ full-frame change, and low-amplitude noise. It currently reports two true
 positives, two true negatives, zero false positives, zero false negatives, and
 100% action selection accuracy. This is a smoke-sized synthetic evaluation, not
 evidence of production accuracy; licensed real-world samples are still needed.
+
+A read-only run against OpenCV's public `opencv_extra` Big Buck Bunny MP4 test
+sample exposed event flooding in the first implementation: 56 cards across 125
+frames. Hysteresis and two regression tests reduced that to one card without
+disabling re-arming after a quiet frame. The corrected report receipt is
+`13a3d89482c0ea6f6ccd2082c1268fb46c383c8f1100565e7bddf7ad57c6c61c`.
+This single public sample proves the regression fix, not general accuracy.

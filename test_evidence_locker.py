@@ -81,6 +81,28 @@ class EvidenceLockerTest(unittest.TestCase):
         self.assertEqual(report["false_negative"], 0)
         self.assertEqual(report["action_accuracy"], 1.0)
 
+    def test_continuous_motion_does_not_flood_evidence(self) -> None:
+        frames = [self.black]
+        for offset in range(10, 60, 10):
+            frame = self.black.copy()
+            cv2.rectangle(frame, (offset, 30), (offset + 29, 59), (255, 255, 255), thickness=-1)
+            frames.append(frame)
+        cards = analyze_frames(frames, fps=10, event_threshold=0.01, reset_threshold=0.005)
+        self.assertEqual(len(cards), 1)
+
+    def test_quiet_frame_rearms_event_detection(self) -> None:
+        first = self.black.copy()
+        cv2.rectangle(first, (10, 10), (49, 49), (255, 255, 255), thickness=-1)
+        second = self.black.copy()
+        cv2.rectangle(second, (90, 50), (129, 89), (255, 255, 255), thickness=-1)
+        cards = analyze_frames(
+            [self.black, first, first.copy(), second],
+            fps=10,
+            event_threshold=0.01,
+            reset_threshold=0.005,
+        )
+        self.assertEqual(tuple(card.frame_index for card in cards), (1, 3))
+
 
 if __name__ == "__main__":
     unittest.main()

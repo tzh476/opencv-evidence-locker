@@ -92,11 +92,15 @@ def analyze_frames(
     *,
     fps: float,
     event_threshold: float = 0.02,
+    reset_threshold: float | None = None,
 ) -> list[EvidenceCard]:
     if fps <= 0:
         raise ValueError("fps must be positive")
     if not 0 <= event_threshold <= 1:
         raise ValueError("event_threshold must be between 0 and 1")
+    reset_threshold = event_threshold / 2 if reset_threshold is None else reset_threshold
+    if not 0 <= reset_threshold < event_threshold:
+        raise ValueError("reset_threshold must be non-negative and below event_threshold")
 
     iterator = iter(frames)
     try:
@@ -107,13 +111,16 @@ def analyze_frames(
 
     cards: list[EvidenceCard] = []
     previous_hash = frame_sha256(previous)
+    armed = True
     for frame_index, current in enumerate(iterator, start=1):
         _validate_frame(current)
         if previous.shape != current.shape:
             raise ValueError("all frames must have identical shapes")
         score = change_score(previous, current)
         current_hash = frame_sha256(current)
-        if score >= event_threshold:
+        if score < reset_threshold:
+            armed = True
+        if score >= event_threshold and armed:
             cards.append(
                 EvidenceCard(
                     frame_index=frame_index,
@@ -124,6 +131,7 @@ def analyze_frames(
                     frame_sha256=current_hash,
                 )
             )
+            armed = False
         previous = current
         previous_hash = current_hash
     return cards
@@ -167,7 +175,12 @@ def seal_report(report: dict[str, object]) -> str:
     return hashlib.sha256(canonical).hexdigest()
 
 
-def analyze_video(path: Path, *, event_threshold: float = 0.02) -> dict[str, object]:
+def analyze_video(
+    path: Path,
+    *,
+    event_threshold: float = 0.02,
+    reset_threshold: float | None = None,
+) -> dict[str, object]:
     capture = cv2.VideoCapture(str(path))
     if not capture.isOpened():
         raise ValueError(f"unable to open video: {path}")
@@ -184,7 +197,13 @@ def analyze_video(path: Path, *, event_threshold: float = 0.02) -> dict[str, obj
         frames.append(frame)
     capture.release()
 
-    cards = analyze_frames(frames, fps=fps, event_threshold=event_threshold)
+    effective_reset_threshold = event_threshold / 2 if reset_threshold is None else reset_threshold
+    cards = analyze_frames(
+        frames,
+        fps=fps,
+        event_threshold=event_threshold,
+        reset_threshold=effective_reset_threshold,
+    )
     plan = plan_review(cards)
     report: dict[str, object] = {
         "schema_version": 1,
@@ -194,6 +213,7 @@ def analyze_video(path: Path, *, event_threshold: float = 0.02) -> dict[str, obj
         "fps": fps,
         "frame_count": len(frames),
         "event_threshold": event_threshold,
+        "reset_threshold": effective_reset_threshold,
         "evidence_cards": [asdict(card) for card in cards],
         "review_plan": asdict(plan),
     }
@@ -206,8 +226,13 @@ def main() -> None:
     parser.add_argument("video", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--event-threshold", type=float, default=0.02)
+    parser.add_argument("--reset-threshold", type=float)
     args = parser.parse_args()
-    report = analyze_video(args.video, event_threshold=args.event_threshold)
+    report = analyze_video(
+        args.video,
+        event_threshold=args.event_threshold,
+        reset_threshold=args.reset_threshold,
+    )
     args.output.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
 
 
