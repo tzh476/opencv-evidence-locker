@@ -1,5 +1,7 @@
 # Evidence Locker — Agentic Vision with OpenCV 5
 
+[![Verify Evidence Locker](https://github.com/tzh476/opencv-evidence-locker/actions/workflows/verify.yml/badge.svg)](https://github.com/tzh476/opencv-evidence-locker/actions/workflows/verify.yml)
+
 This repository is the reproducible source package for the **Evidence Locker**
 OpenCV AI Competition 2026 project. It turns a video into deterministic evidence
 cards containing the changed frame, timestamp, changed bounding boxes, and
