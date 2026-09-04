@@ -1,15 +1,21 @@
-# Agentic Vision Evidence Locker — bounded spike
+# Evidence Locker — Agentic Vision with OpenCV 5
 
-This local prototype tests one narrow OpenCV 5 premise for the OpenCV AI
-Competition 2026. It turns a video into deterministic evidence cards containing
-the changed frame, timestamp, changed bounding boxes, and hashes of the exact
-before/after frames. A bounded review planner then changes its next action based
-on those cards: complete, rerun extraction, seal localized evidence, or request
-human approval. The canonical report is sealed with a separate SHA-256 receipt.
+This repository is the reproducible source package for the **Evidence Locker**
+OpenCV AI Competition 2026 project. It turns a video into deterministic evidence
+cards containing the changed frame, timestamp, changed bounding boxes, and
+hashes of the exact before/after frames. A bounded review planner then changes
+its next action based on those cards: complete, rerun extraction, seal localized
+evidence, or request human approval. The canonical report is sealed with a
+separate SHA-256 receipt.
 
-It is not a contest entry, AWS deployment, agent implementation, registration,
-award, or income. The future agent layer would interpret evidence cards and ask
-for human review; it must not invent visual facts that OpenCV did not extract.
+The implemented explanation layer may cite only extracted frame evidence and the
+policy-selected action; it must not invent visual facts that OpenCV did not
+extract. Local and container results below are verified. A live AWS deployment,
+contest award, and payment are not claimed.
+
+- [Three-minute demo video](https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4)
+- [Technical report](Evidence-Locker-Technical-Report.pdf)
+- [Bounded AWS architecture](architecture.svg)
 
 ## Verify
 
@@ -92,14 +98,14 @@ been deployed, connected to API Gateway, or exercised against a real AWS account
 
 ## Verified result — 2026-08-31
 
-The isolated spike environment reported OpenCV `5.0.0`; all twenty-six unit tests
-passed. A 20-frame, 10 FPS synthetic black-to-white video produced exactly one
-evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
+The isolated environment reported OpenCV `5.0.0`; all thirty-one tests passed
+from a clean install. A 20-frame, 10 FPS synthetic black-to-white video produced
+exactly one evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
 one `(0, 0, 160, 100)` region, and distinct SHA-256 hashes for the previous and
 current frames. The planner selected `request_human_approval`, and the canonical
 report receipt was `7fa0a95b5df55085182e0663c5968a38e8b1d647fef5e031308d278e82976d9c`.
-The generated video and JSON remained under `/tmp` and are not contest assets or
-external evidence.
+The generated synthetic video and JSON remained under `/tmp`; the repository
+records the deterministic assertions and receipt rather than temporary output.
 
 The seeded four-scenario evaluation covers no change, localized change,
 full-frame change, and low-amplitude noise. It currently reports two true
@@ -151,7 +157,8 @@ and any recommendation that differs from the bounded plan.
 
 The Lambda-compatible image was then built locally from
 `public.ecr.aws/lambda/python:3.13-arm64`. Inside that image, Python reported
-`aarch64`, OpenCV reported `5.0.0`, and all twenty-six tests passed again. The
+`aarch64`, OpenCV reported `5.0.0`, and all twenty-six runtime tests passed again;
+the five SAM-template tests run on the host. The
 architecture SVG was rendered to a 1,200 x 620 PNG in headless Chrome and
 visually checked. No image was pushed to a registry and no AWS resource was
 created.
