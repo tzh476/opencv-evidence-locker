@@ -9,6 +9,19 @@ Parameters:
     MinValue: 1
     MaxValue: 30
     Description: Days to retain uploaded videos and generated evidence reports.
+  ReservedConcurrency:
+    Type: Number
+    Default: 0
+    MinValue: 0
+    MaxValue: 2
+    Description: Optional Lambda reserved concurrency; zero leaves it unset for low-quota accounts.
+
+Conditions:
+  UseReservedConcurrency:
+    Fn::Not:
+      - Fn::Equals:
+          - Ref: ReservedConcurrency
+          - 0
 
 Resources:
   InputBucket:
@@ -63,7 +76,11 @@ Resources:
         - arm64
       MemorySize: 2048
       Timeout: 120
-      ReservedConcurrentExecutions: 2
+      ReservedConcurrentExecutions:
+        Fn::If:
+          - UseReservedConcurrency
+          - Ref: ReservedConcurrency
+          - Ref: AWS::NoValue
       EphemeralStorage:
         Size: 2048
       Environment:

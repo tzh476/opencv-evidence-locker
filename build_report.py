@@ -162,7 +162,7 @@ def draw_cover(canvas: Canvas) -> None:
     canvas.setFillColor(INK)
     canvas.setFont(FONT_BOLD, 8)
     canvas.drawString(24 * mm, 34 * mm, "STATUS")
-    canvas.drawRightString(PAGE_W - 24 * mm, 34 * mm, "LOCAL + CONTAINER VERIFIED · AWS LIVE RUN PENDING")
+    canvas.drawRightString(PAGE_W - 24 * mm, 34 * mm, "LOCAL + CONTAINER + BOUNDED AWS RUN VERIFIED")
 
 
 def draw_system(canvas: Canvas) -> None:
@@ -332,13 +332,13 @@ def draw_evaluation(canvas: Canvas) -> None:
 
 
 def draw_aws(canvas: Canvas) -> None:
-    page_base(canvas, 6, "Prepared AWS component", ORANGE)
+    page_base(canvas, 6, "Verified AWS smoke · 2026-09-04", ORANGE)
     y = heading(canvas, "BOUNDED CLOUD DELIVERY", "Private input.\nEncrypted evidence.", accent=ORANGE)
-    paragraph(canvas, "The SAM template and Lambda-compatible arm64 container are locally verified. A live AWS deployment remains pending.", 18 * mm, y, 165 * mm, size=11)
+    paragraph(canvas, "A live us-east-2 smoke run processed one right-cleared synthetic MP4, verified both receipts and structured logs, then removed every created AWS resource.", 18 * mm, y, 165 * mm, size=11)
 
     items = [
         ("01", "PRIVATE S3", "incoming/*.mp4 only\nAES-256 at rest"),
-        ("02", "ARM64 LAMBDA", "OpenCV 5 container\nreserved concurrency: 2"),
+        ("02", "ARM64 LAMBDA", "OpenCV 5.0.0\n160 MB peak"),
         ("03", "EVIDENCE S3", "canonical JSON receipt\nseparate encrypted bucket"),
     ]
     x = 18 * mm
@@ -360,11 +360,11 @@ def draw_aws(canvas: Canvas) -> None:
         x += 61 * mm
 
     controls = [
-        "Reject multiple S3 records and output-recursion events.",
-        "Default object retention: 7 days; configurable 1–30 days.",
-        "CloudWatch log retention: 14 days.",
-        "No public buckets; report location returned by Lambda invocation.",
-        "Right-cleared demo media only; deployment claims require live proof.",
+        "One evidence card; 3,004 ms analysis; 3,791 ms billed.",
+        "Encrypted 1,681-byte JSON; report and storage receipts verified.",
+        "First cold initialization timed out; AWS retried and completed the event.",
+        "No public bucket or API; full receipts are published in the README.",
+        "Post-run checks: zero buckets, functions, ECR repos, active stacks, logs, or roles.",
     ]
     card(canvas, 18 * mm, 40 * mm, 174 * mm, 66 * mm, fill=PANEL_2)
     canvas.setFillColor(ORANGE)
@@ -424,7 +424,7 @@ def draw_close(canvas: Canvas) -> None:
     canvas.drawString(42 * mm, 43 * mm, "github.com/tzh476/opencv-evidence-locker")
     canvas.setFillColor(AMBER)
     canvas.setFont(FONT_BOLD, 7.5)
-    canvas.drawString(18 * mm, 31 * mm, "NO AWARD OR PAYMENT CLAIMED · LIVE AWS EVIDENCE WILL BE ADDED ONLY AFTER VERIFICATION")
+    canvas.drawString(18 * mm, 31 * mm, "NO AWARD OR PAYMENT CLAIMED · AWS SMOKE VERIFIED 2026-09-04 · RESOURCES REMOVED")
 
 
 def build() -> Path:

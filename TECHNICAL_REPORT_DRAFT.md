@@ -1,9 +1,8 @@
-# Agentic Vision Evidence Locker — technical report draft
+# Agentic Vision Evidence Locker — technical report
 
-> Local preparation only — not a Devpost submission, a representation that AWS
-> has been deployed, or a claim of prize eligibility. The applicant must review
-> every statement, add deployment evidence after an approved deployment, and
-> complete any final project-page declarations personally.
+> Local and container verification plus one bounded live AWS smoke run are
+> documented below. This report does not claim a persistent production service,
+> contest award, prize eligibility decision, or payment.
 
 ## 1. Project summary
 
@@ -99,34 +98,36 @@ HTML escaping in the review UI.
 - The agent cannot make an irreversible or factual claim beyond the OpenCV
   evidence. Material changes route to human approval.
 
-## 7. Proposed AWS component — not deployed
+## 7. Verified bounded AWS smoke run
 
-The prepared adapter and `template.yaml` define a proposed low-cost, meaningful
-AWS path, not an existing service. An encrypted private input bucket accepts
-right-cleared `incoming/*.mp4` objects and invokes an arm64 Lambda container
-with OpenCV 5. The function analyzes one bounded sample, writes a
-server-side-encrypted JSON receipt to a separate private report bucket, and
-returns the receipt location in its invocation result. The adapter rejects
-multiple records and output-recursion events. The template caps reserved
-concurrency at two, expires objects after seven days by default, and retains
-CloudWatch logs for fourteen days.
+On September 4, 2026, the SAM stack was deployed in `us-east-2` and exercised
+with one locally generated synthetic MP4. The private input bucket triggered the
+arm64 Lambda container. OpenCV `5.0.0` produced one evidence card and wrote a
+1,681-byte AES-256-encrypted JSON report to the separate private evidence bucket.
+The structured completion log measured `3004.288 ms` for analysis; the successful
+invocation was billed for `3791 ms` and used `160 MB` peak memory out of `2048 MB`.
 
-Before claiming this component in any entry, the applicant must personally:
+The canonical report receipt was
+`5c189c2ab35a37032e798cee3098ce0f315f37730c55997761de6ec2161b4d90` and
+the storage receipt was
+`116b0b09bab3f1aa9195d90ad2d6b1809b9ecb27c7bc6e56b6729a282db230ed`.
+The first cold initialization attempt reached Lambda's initialization timeout;
+AWS retried and the event completed successfully. This is a concrete optimization
+target before any production claim.
 
-1. approve the account, billing, IAM, storage, and retention choices;
-2. deploy and verify the endpoint using a right-cleared sample;
-3. capture the actual architecture, logs, receipt, latency, and cost evidence;
-4. remove any assertion from this report that the deployed result cannot support.
+After verification, all test objects and AWS resources created for the run were
+deleted. Final queries returned zero remaining buckets, Lambda functions, ECR
+repositories, active CloudFormation stacks, matching log groups, and matching
+IAM roles. The project intentionally leaves no persistent write endpoint.
 
 ## 8. Submission-material checklist
 
 - [x] Local code, pinned runtime dependency, tests, synthetic evaluation, and
   architecture diagram.
-- [x] Local technical-report and video-script drafts.
-- [ ] Applicant-reviewed project description and license decision.
-- [ ] Applicant-approved AWS account/billing path and a meaningful deployed
-  component.
-- [ ] Right-cleared demo media, held-out evaluation, and deployment receipts.
-- [ ] Judge-accessible endpoint or applicant-arranged live demonstration.
-- [ ] Applicant-reviewed video, project-page declarations, terms, and final
+- [x] Technical report, video, and applicant-reviewed project description.
+- [x] One bounded AWS deployment with right-cleared synthetic media, logs,
+  latency, memory, and receipt evidence; resources removed afterward.
+- [x] Judge-accessible read-only endpoint and public source package.
+- [x] Applicant-reviewed video, project-page declarations, terms, and final
   submission.
+- [ ] Larger right-cleared held-out evaluation and cold-start optimization.

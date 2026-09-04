@@ -12,8 +12,8 @@ separate SHA-256 receipt.
 
 The implemented explanation layer may cite only extracted frame evidence and the
 policy-selected action; it must not invent visual facts that OpenCV did not
-extract. Local and container results below are verified. A live AWS deployment,
-contest award, and payment are not claimed.
+extract. Local, container, and one bounded live AWS smoke run are verified below.
+No persistent AWS endpoint, contest award, or payment is claimed.
 
 - [Three-minute competition demo](https://youtu.be/K-sKVB3lXqg)
 - [Source-video release asset](https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4)
@@ -45,10 +45,13 @@ SAM_CLI_TELEMETRY=0 sam validate --lint --template-file template.yaml
 ```
 
 `template.yaml` creates two private AES-256-encrypted S3 buckets, an arm64
-container Lambda, a single `incoming/*.mp4` event boundary, two reserved
+container Lambda, a single `incoming/*.mp4` event boundary, optional 1-2 reserved
 concurrent executions, fourteen-day logs, and configurable 1-30 day object
-retention (seven days by default). The template is deployment preparation only;
-it is not evidence that any AWS resource or endpoint exists.
+retention (seven days by default). Reserved concurrency defaults to unset so the
+stack also works in new low-quota AWS accounts; set `ReservedConcurrency=1` or
+`2` only when the account has sufficient unreserved concurrency. The template
+alone is not deployment evidence; the dated smoke evidence below records the
+separate live verification.
 
 Analyze a local video without uploading it:
 
@@ -104,22 +107,32 @@ Render a standalone human-review page next to the generated overlays:
 - Escapes report data and renders a standalone decision-and-evidence review page.
 - Constrains the explanation layer to known frame ids and the bounded OpenCV
   review action; unknown claims or unapproved actions fail closed.
-- Performs no network, cloud, account, billing, or external write.
+- Local verification commands perform no network, cloud, account, billing, or
+  external write; only the separately confirmed deployment script does so.
 
-## Next technical boundary
+## AWS live smoke — 2026-09-04
 
-The local build now has a human-review UI, a fail-closed evidence explanation
-boundary, a deterministic smoke evaluation, a Lambda adapter, a bounded SAM
-template, and a public read-only judge endpoint. The remaining
-competition-critical boundary is a real AWS deployment using right-cleared
-input, with captured logs, latency, cost, and storage receipts. None of those
-deployment claims are made by the local build.
+The bounded SAM stack was deployed in `us-east-2` and exercised with one locally
+generated synthetic MP4. A private S3 upload triggered the arm64 Lambda, which
+reported OpenCV `5.0.0`, produced one evidence card and a 1,681-byte encrypted
+JSON report, and emitted structured start/completion logs. The analysis step took
+`3004.288 ms`; the successful invocation was billed for `3791 ms` and used
+`160 MB` peak memory out of the configured `2048 MB`.
 
-`lambda_handler.py` now provides a locally tested boundary for the proposed AWS
-path: one S3 object event downloads a video, runs the same OpenCV evidence
-pipeline, and writes an AES-256 server-side-encrypted JSON report to a separate
-S3 prefix. It rejects batches and output-recursion events. The adapter has not
-been deployed, connected to API Gateway, or exercised against a real AWS account.
+The canonical report receipt was
+`5c189c2ab35a37032e798cee3098ce0f315f37730c55997761de6ec2161b4d90`;
+the storage receipt was
+`116b0b09bab3f1aa9195d90ad2d6b1809b9ecb27c7bc6e56b6729a282db230ed`.
+The first cold initialization attempt reached Lambda's initialization timeout;
+AWS retried and the event completed successfully. This is a measured cold-start
+limitation, not a production reliability claim.
+
+After evidence capture, the input/report objects, application stack, companion
+ECR stack, SAM bootstrap stack, buckets, image repository, function, log group,
+and role were deleted. A final account query returned zero remaining buckets,
+functions, ECR repositories, active CloudFormation stacks, matching log groups,
+and matching IAM roles. There is intentionally no persistent API Gateway or live
+write endpoint; the public judge page remains a deterministic read-only artifact.
 
 ![Bounded AWS architecture](architecture.svg)
 
@@ -167,7 +180,7 @@ same report receipt (`39584d0272d96679c591d87f1836fbe44e0635adc6e835b35b030a0686
 The samples remain in `/tmp`; this repository records hashes and bounded results,
 not the media.
 
-Before any cloud deployment, the local gate is: all tests pass; the seeded
+The cloud deployment gate is: all tests pass; the seeded
 positive/negative set has zero FP/FN; repeated input yields the same receipt;
 each public sample completes; and event density stays below 10% of frames. These
 are engineering gates for the spike, not claims of real-world precision or recall.
@@ -187,5 +200,5 @@ The Lambda-compatible image was then built locally from
 `aarch64`, OpenCV reported `5.0.0`, and all twenty-six runtime tests passed again;
 the five SAM-template tests run on the host. The
 architecture SVG was rendered to a 1,200 x 620 PNG in headless Chrome and
-visually checked. No image was pushed to a registry and no AWS resource was
-created.
+visually checked. The later dated AWS smoke above supersedes the earlier
+local-only boundary while preserving the same container and template tests.

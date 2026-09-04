@@ -28,8 +28,20 @@ class InfrastructureTemplateTest(unittest.TestCase):
     def test_compute_and_storage_are_bounded(self) -> None:
         properties = self.resources["EvidenceFunction"]["Properties"]
         self.assertLessEqual(properties["Timeout"], 120)
-        self.assertLessEqual(properties["ReservedConcurrentExecutions"], 2)
         self.assertLessEqual(properties["EphemeralStorage"]["Size"], 2048)
+        concurrency = self.template["Parameters"]["ReservedConcurrency"]
+        self.assertEqual(concurrency["Default"], 0)
+        self.assertLessEqual(concurrency["MaxValue"], 2)
+        self.assertEqual(
+            properties["ReservedConcurrentExecutions"],
+            {
+                "Fn::If": [
+                    "UseReservedConcurrency",
+                    {"Ref": "ReservedConcurrency"},
+                    {"Ref": "AWS::NoValue"},
+                ]
+            },
+        )
         retention = self.template["Parameters"]["ArtifactRetentionDays"]
         self.assertEqual(retention["Default"], 7)
         self.assertLessEqual(retention["MaxValue"], 30)

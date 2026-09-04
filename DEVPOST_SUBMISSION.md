@@ -45,9 +45,14 @@ serialization, and the complete report receives its own SHA-256 receipt.
 
 The repository also includes a Lambda adapter and bounded AWS SAM template. The
 template defines private encrypted input and report buckets, an arm64 OpenCV 5
-container Lambda, a single `incoming/*.mp4` event boundary, reserved concurrency
-of two, short retention, and least-privilege bucket policies. The image and
-template are verified locally; no live AWS deployment is claimed yet.
+container Lambda, a single `incoming/*.mp4` event boundary, optional reserved
+concurrency of one or two, short retention, and least-privilege bucket policies.
+On September 4 we deployed it in `us-east-2` for one bounded smoke run. A private
+S3 upload triggered Lambda, OpenCV 5.0.0 produced one evidence card and encrypted
+JSON report, and the analysis completed in 3004 ms (3791 ms billed, 160 MB peak
+memory). We verified both SHA-256 receipts and structured CloudWatch logs, then
+deleted the stack, buckets, ECR repository, function, logs, and role. No public
+write endpoint or persistent AWS resource remains.
 
 ### Agent workflow and human control
 
@@ -84,10 +89,11 @@ dataset, calibrated thresholds, and measured precision/recall tradeoffs.
 
 ### What's next
 
-The next verified milestone is a live AWS run with a right-cleared sample,
-captured CloudWatch logs, latency, storage receipt, and bounded cost. After that,
-we would expand the held-out evaluation and preserve the same evidence-first,
-human-controlled policy boundary.
+The next milestone is a larger right-cleared held-out evaluation and cold-start
+optimization. The first live Lambda cold initialization reached the initialization
+timeout before AWS retried and completed the event, so reducing image/init cost is
+more valuable than keeping an idle demo stack online. We will preserve the same
+evidence-first, human-controlled policy boundary.
 
 ## Built with
 
