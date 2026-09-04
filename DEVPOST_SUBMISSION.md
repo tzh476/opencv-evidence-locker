@@ -95,7 +95,13 @@ human-controlled policy boundary.
 
 ## Try it out
 
+https://tzh476.github.io/opencv-evidence-locker/
+
 https://github.com/tzh476/opencv-evidence-locker
+
+The live page is a deterministic, read-only judge endpoint. Its canonical
+machine-readable evidence is available at:
+https://tzh476.github.io/opencv-evidence-locker/evidence.json
 
 ## Demo video
 

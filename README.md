@@ -14,6 +14,8 @@ extract. Local and container results below are verified. A live AWS deployment,
 contest award, and payment are not claimed.
 
 - [Three-minute demo video](https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4)
+- [Live judge endpoint](https://tzh476.github.io/opencv-evidence-locker/)
+- [Canonical demo evidence JSON](https://tzh476.github.io/opencv-evidence-locker/evidence.json)
 - [Technical report](Evidence-Locker-Technical-Report.pdf)
 - [Bounded AWS architecture](architecture.svg)
 
@@ -88,10 +90,10 @@ Render a standalone human-review page next to the generated overlays:
 ## Next technical boundary
 
 The local build now has a human-review UI, a fail-closed evidence explanation
-boundary, a deterministic smoke evaluation, a Lambda adapter, and a bounded SAM
-template. The remaining competition-critical boundary is a real AWS deployment
-using right-cleared input, with captured logs, latency, cost, storage receipts,
-and an arranged live demonstration or judge-accessible endpoint. None of those
+boundary, a deterministic smoke evaluation, a Lambda adapter, a bounded SAM
+template, and a public read-only judge endpoint. The remaining
+competition-critical boundary is a real AWS deployment using right-cleared
+input, with captured logs, latency, cost, and storage receipts. None of those
 deployment claims are made by the local build.
 
 `lambda_handler.py` now provides a locally tested boundary for the proposed AWS

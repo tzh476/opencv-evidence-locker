@@ -66,7 +66,8 @@ def build_demo(output_dir: Path) -> dict[str, object]:
     )
     html = render_report_html(report).replace(
         "</main>",
-        '<p><a href="https://github.com/tzh476/opencv-evidence-locker">'
+        '<p><a href="evidence.json">Download the canonical evidence JSON</a>'
+        ' · <a href="https://github.com/tzh476/opencv-evidence-locker">'
         "Source, tests, architecture, and technical report</a></p></main>",
     )
     (output_dir / "index.html").write_text(html)

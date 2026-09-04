@@ -1,0 +1,56 @@
+{
+  "event_threshold": 0.02,
+  "evidence_cards": [
+    {
+      "change_score": 0.148925,
+      "changed_regions": [
+        [
+          180,
+          160,
+          320,
+          200
+        ],
+        [
+          630,
+          200,
+          141,
+          141
+        ]
+      ],
+      "frame_index": 1,
+      "frame_sha256": "4d223d75cbaba177dd74e163395bb5f13e2672922df4f07ac9cc6d20b92420e3",
+      "previous_sha256": "52f9523071641f22f7a5c99a2a7500dcec1465c3169108e57dab839a574e7b78",
+      "timestamp_ms": 100
+    }
+  ],
+  "explanation": {
+    "cited_frame_indices": [
+      1
+    ],
+    "explanation_sha256": "bccb8f29ef3562bcff62bdbddf96912ac0d84ed75645bc8cd77ed3b8db506ffc",
+    "recommended_action": "seal_evidence_for_agent_summary",
+    "summary": "OpenCV produced 1 evidence card(s) with 2 review region(s); maximum normalized change was 0.148925."
+  },
+  "fps": 10.0,
+  "frame_count": 2,
+  "opencv_version": "5.0.0",
+  "overlays": [
+    {
+      "filename": "evidence-frame-000001.png",
+      "frame_index": 1,
+      "sha256": "49ccc05f3d59fac5ba66257425fdb959c7e77b06936fad468b96a7466342215b"
+    }
+  ],
+  "receipt_sha256": "7cdecc659b849dcd5940d92aae3095d81e3c101c87d5ff3b8e4651ad485b54b1",
+  "reset_threshold": 0.01,
+  "review_plan": {
+    "action": "seal_evidence_for_agent_summary",
+    "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+    "triggering_frames": [
+      1
+    ]
+  },
+  "schema_version": 1,
+  "source": "deterministic synthetic transition",
+  "source_sha256": "26b856f3449db3f1d4abf70fed4bda55b30c2ce847b6faa67d330bdf011ac4de"
+}
