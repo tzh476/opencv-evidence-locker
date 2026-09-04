@@ -56,9 +56,27 @@ class InfrastructureTemplateTest(unittest.TestCase):
     def test_function_has_only_required_bucket_policies(self) -> None:
         policies = self.resources["EvidenceFunction"]["Properties"]["Policies"]
         self.assertEqual(policies, [
-            {"S3ReadPolicy": {"BucketName": {"Ref": "InputBucket"}}},
+            {
+                "S3ReadPolicy": {
+                    "BucketName": {
+                        "Fn::Sub": "opencv-evidence-${AWS::AccountId}-${AWS::Region}-input"
+                    }
+                }
+            },
             {"S3WritePolicy": {"BucketName": {"Ref": "EvidenceBucket"}}},
         ])
+
+    def test_input_bucket_name_breaks_the_s3_function_dependency_cycle(self) -> None:
+        input_bucket = self.resources["InputBucket"]["Properties"]
+        self.assertEqual(
+            input_bucket["BucketName"],
+            {"Fn::Sub": "opencv-evidence-${AWS::AccountId}-${AWS::Region}-input"},
+        )
+        read_bucket = self.resources["EvidenceFunction"]["Properties"]["Policies"][0]
+        self.assertNotEqual(
+            read_bucket["S3ReadPolicy"]["BucketName"],
+            {"Ref": "InputBucket"},
+        )
 
 
 if __name__ == "__main__":

@@ -20,13 +20,15 @@ jobs:
           python-version: "3.13"
           cache: pip
       - name: Install pinned runtime
-        run: python -m pip install -r requirements.txt
+        run: python -m pip install -r requirements.txt cfn-lint==1.56.0
       - name: Confirm OpenCV 5
         run: python -c "import cv2; assert cv2.__version__ == '5.0.0'; print(cv2.__version__)"
       - name: Run all tests
         run: python -m unittest -v
       - name: Run seeded evaluation
         run: python evaluate_synthetic.py
+      - name: Lint deployable SAM template
+        run: cfn-lint template.yaml
       - name: Rebuild judge endpoint
         run: |
           python build_static_demo.py --output-dir /tmp/evidence-locker-site

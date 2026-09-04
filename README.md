@@ -40,6 +40,7 @@ Validate the bounded AWS SAM template locally (this creates no AWS resources):
 
 ```bash
 .venv/bin/python -m unittest -v test_infrastructure.py
+SAM_CLI_TELEMETRY=0 sam validate --lint --template-file template.yaml
 ```
 
 `template.yaml` creates two private AES-256-encrypted S3 buckets, an arm64
@@ -108,7 +109,7 @@ been deployed, connected to API Gateway, or exercised against a real AWS account
 
 ## Verified result — 2026-08-31
 
-The isolated environment reported OpenCV `5.0.0`; all thirty-one tests passed
+The isolated environment reported OpenCV `5.0.0`; all thirty-two tests passed
 from a clean install. A 20-frame, 10 FPS synthetic black-to-white video produced
 exactly one evidence card at frame 10 / 1,000 ms, with a `0.992157` normalized change score,
 one `(0, 0, 160, 100)` region, and distinct SHA-256 hashes for the previous and

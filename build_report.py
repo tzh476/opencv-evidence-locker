@@ -153,7 +153,7 @@ def draw_cover(canvas: Canvas) -> None:
 
     top = 72 * mm
     card(canvas, 18 * mm, top, 174 * mm, 42 * mm, stroke=MINT)
-    metric(canvas, 25 * mm, top + 25 * mm, "31 / 31", "local tests passed", accent=MINT)
+    metric(canvas, 25 * mm, top + 25 * mm, "32 / 32", "local tests passed", accent=MINT)
     metric(canvas, 78 * mm, top + 25 * mm, "2 TP · 2 TN", "seeded smoke evaluation", accent=BLUE)
     metric(canvas, 139 * mm, top + 25 * mm, "SHA-256", "canonical evidence receipt", accent=colors.HexColor("#C39BFF"))
 

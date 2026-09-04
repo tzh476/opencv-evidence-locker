@@ -59,7 +59,7 @@ action set or cite a frame that OpenCV did not extract.
 
 ### Evaluation
 
-A clean OpenCV 5 environment passes all 31 tests. The seeded four-scenario suite
+A clean OpenCV 5 environment passes all 32 tests. The seeded four-scenario suite
 covers no change, localized change, full-frame change, and low-amplitude noise:
 2 true positives, 2 true negatives, 0 false positives, 0 false negatives, and
 4/4 correct downstream actions. This is an engineering smoke test, not a claim
