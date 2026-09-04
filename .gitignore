@@ -1,5 +1,6 @@
 __pycache__/
 .venv/
+.aws-sam/
 *.pyc
 evidence.json
 !docs/evidence.json

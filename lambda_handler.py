@@ -4,12 +4,20 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import os
 from pathlib import Path
+from time import perf_counter
 from typing import Any
 from urllib.parse import unquote_plus
 
+import cv2
+
 from evidence_locker import analyze_video, seal_report
+
+
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
 
 
 def _source_from_event(event: dict[str, Any]) -> tuple[str, str, str]:
@@ -58,27 +66,68 @@ def handler(
     input_path = Path("/tmp") / f"{job_id}.video"
     report_path = Path("/tmp") / f"{job_id}.json"
     output_key = _output_key(source_bucket, source_key, source_etag)
-
-    s3_client.download_file(source_bucket, source_key, str(input_path))
-    report = analyze_video(input_path)
-    source_report_receipt = report["receipt_sha256"]
-    report["source_s3"] = {
-        "bucket": source_bucket,
-        "key": source_key,
-        "etag": source_etag,
-    }
-    report["storage_receipt_sha256"] = seal_report(report)
-    report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
-    s3_client.upload_file(
-        str(report_path),
-        output_bucket,
-        output_key,
-        ExtraArgs={"ContentType": "application/json", "ServerSideEncryption": "AES256"},
+    started_at = perf_counter()
+    LOGGER.info(
+        json.dumps(
+            {
+                "event": "analysis_started",
+                "job_id": job_id,
+                "opencv_version": cv2.__version__,
+            },
+            sort_keys=True,
+        )
     )
-    return {
-        "status": "report_written",
-        "output_bucket": output_bucket,
-        "output_key": output_key,
-        "report_receipt_sha256": source_report_receipt,
-        "storage_receipt_sha256": report["storage_receipt_sha256"],
-    }
+    try:
+        s3_client.download_file(source_bucket, source_key, str(input_path))
+        report = analyze_video(input_path)
+        source_report_receipt = report["receipt_sha256"]
+        report["source_s3"] = {
+            "bucket": source_bucket,
+            "key": source_key,
+            "etag": source_etag,
+        }
+        report["storage_receipt_sha256"] = seal_report(report)
+        report_path.write_text(json.dumps(report, indent=2, sort_keys=True) + "\n")
+        s3_client.upload_file(
+            str(report_path),
+            output_bucket,
+            output_key,
+            ExtraArgs={"ContentType": "application/json", "ServerSideEncryption": "AES256"},
+        )
+        LOGGER.info(
+            json.dumps(
+                {
+                    "elapsed_ms": round((perf_counter() - started_at) * 1000, 3),
+                    "event": "analysis_completed",
+                    "evidence_card_count": len(report.get("evidence_cards", [])),
+                    "job_id": job_id,
+                    "opencv_version": cv2.__version__,
+                    "report_receipt_sha256": source_report_receipt,
+                    "storage_receipt_sha256": report["storage_receipt_sha256"],
+                },
+                sort_keys=True,
+            )
+        )
+        return {
+            "status": "report_written",
+            "output_bucket": output_bucket,
+            "output_key": output_key,
+            "report_receipt_sha256": source_report_receipt,
+            "storage_receipt_sha256": report["storage_receipt_sha256"],
+        }
+    except Exception as exc:
+        LOGGER.exception(
+            json.dumps(
+                {
+                    "event": "analysis_failed",
+                    "error_type": type(exc).__name__,
+                    "job_id": job_id,
+                    "opencv_version": cv2.__version__,
+                },
+                sort_keys=True,
+            )
+        )
+        raise
+    finally:
+        input_path.unlink(missing_ok=True)
+        report_path.unlink(missing_ok=True)

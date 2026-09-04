@@ -67,6 +67,21 @@ Build the deterministic read-only demo used by the public project endpoint:
 .venv/bin/python build_static_demo.py --output-dir docs
 ```
 
+After the AWS account owner has signed in and explicitly approved creating the
+bounded private resources, run the one-input cloud smoke path:
+
+```bash
+AWS_REGION=us-east-1 ./deploy_aws_demo.sh --confirm-create-resources
+```
+
+The script validates and builds the SAM application, deploys one private
+S3-triggered arm64 Lambda stack with one-day artifact retention, generates a
+right-cleared synthetic MP4, uploads it once, verifies the returned OpenCV 5
+receipt, and prints only the structured CloudWatch evidence lines. It has no
+public write endpoint and refuses to run without the explicit flag. It requires
+authenticated AWS CLI credentials, a running Docker daemon, AWS SAM CLI, and a
+Python interpreter with OpenCV (override it with `PYTHON_BIN` if needed).
+
 Render a standalone human-review page next to the generated overlays:
 
 ```bash

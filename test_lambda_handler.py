@@ -64,8 +64,14 @@ class LambdaHandlerTest(unittest.TestCase):
             fake_s3 = FakeS3(source)
             fake_report = {"receipt_sha256": "f" * 64, "evidence_cards": []}
             with patch.dict(os.environ, {"EVIDENCE_OUTPUT_BUCKET": "evidence"}, clear=True):
-                with patch("lambda_handler.analyze_video", return_value=fake_report):
-                    result = handler(s3_event(key="incoming%2Fdemo.mp4"), None, s3_client=fake_s3)
+                with patch(
+                    "lambda_handler.analyze_video", return_value=fake_report
+                ) as analyze_video, patch(
+                    "lambda_handler.LOGGER.info"
+                ) as log_info:
+                    result = handler(
+                        s3_event(key="incoming%2Fdemo.mp4"), None, s3_client=fake_s3
+                    )
 
             self.assertEqual(fake_s3.downloaded, ("input-bucket", "incoming/demo.mp4"))
             self.assertEqual(result["status"], "report_written")
@@ -82,7 +88,18 @@ class LambdaHandlerTest(unittest.TestCase):
                 fake_s3.uploaded_body["storage_receipt_sha256"],
                 result["storage_receipt_sha256"],
             )
-
+            messages = [json.loads(call.args[0]) for call in log_info.call_args_list]
+            self.assertEqual(
+                [message["event"] for message in messages],
+                ["analysis_started", "analysis_completed"],
+            )
+            self.assertEqual(messages[0]["opencv_version"], messages[1]["opencv_version"])
+            self.assertEqual(messages[1]["evidence_card_count"], 0)
+            self.assertRegex(messages[1]["storage_receipt_sha256"], r"^[0-9a-f]{64}$")
+            self.assertNotIn("input-bucket", json.dumps(messages))
+            self.assertNotIn("incoming/demo.mp4", json.dumps(messages))
+            self.assertFalse(analyze_video.call_args.args[0].exists())
+            self.assertFalse(Path(fake_s3.uploaded[0]).exists())
 
 if __name__ == "__main__":
     unittest.main()
