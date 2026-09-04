@@ -62,18 +62,33 @@ def render_report_html(report: dict[str, Any]) -> str:
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Agentic Vision Evidence Review</title>
+<title>Evidence Locker · Agentic Vision Review</title>
 <style>
-body{{font:16px system-ui;margin:0;background:#0b1020;color:#e8eefc}}
-main{{max-width:960px;margin:auto;padding:32px}}
-.decision,.card{{background:#151d33;border:1px solid #344260;border-radius:12px;padding:20px;margin:16px 0}}
-.decision{{border-color:#f4b942}} code{{display:block;overflow-wrap:anywhere;color:#9dc5ff;margin-top:8px}}
-img{{display:block;max-width:100%;height:auto;border-radius:8px;margin:12px 0}}
-.receipt{{font-family:ui-monospace,monospace;overflow-wrap:anywhere}}
+:root{{color-scheme:dark;--bg:#07101c;--panel:#111d2d;--line:#263950;--ink:#eef6ff;--muted:#9eb0c4;--mint:#68f6c3;--amber:#ffcb69}}
+*{{box-sizing:border-box}}
+body{{font:16px/1.6 Inter,ui-sans-serif,system-ui,sans-serif;margin:0;background:radial-gradient(circle at 15% 0,#15304a 0,transparent 36rem),var(--bg);color:var(--ink)}}
+main{{max-width:1120px;margin:auto;padding:64px 28px 80px}}
+.hero{{padding:32px 0 40px}}
+.eyebrow{{color:var(--mint);font-size:.78rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase}}
+h1{{font-size:clamp(2.8rem,7vw,5.8rem);line-height:.95;letter-spacing:-.055em;margin:.2em 0}}
+h2,h3{{line-height:1.15}} .lede{{max-width:760px;color:var(--muted);font-size:1.12rem}} .source{{color:var(--muted)}}
+.badges{{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}} .badges span{{border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--muted);font-size:.82rem}}
+.decision,.card{{background:linear-gradient(145deg,rgba(25,42,64,.96),rgba(13,25,40,.96));border:1px solid var(--line);border-radius:18px;padding:26px;margin:18px 0;box-shadow:0 18px 50px rgba(0,0,0,.18)}}
+.decision{{border-color:#8b713c}} .decision h2{{color:var(--amber);font-family:ui-monospace,monospace;font-size:clamp(1.1rem,3vw,1.65rem)}}
+.cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}}
+.card{{margin:0}} code{{display:block;overflow-wrap:anywhere;color:#9dc5ff;margin-top:8px;font-size:.75rem}}
+img{{display:block;width:100%;height:auto;border-radius:12px;margin:18px 0;border:1px solid var(--line)}}
+.receipt{{font-family:ui-monospace,monospace;overflow-wrap:anywhere;color:var(--muted);margin:28px 0}} a{{color:var(--mint)}}
+@media(max-width:600px){{main{{padding:32px 18px 56px}}.decision,.card{{padding:20px}}}}
 </style>
 <main>
-<h1>Agentic Vision Evidence Review</h1>
-<p>Source: <strong>{_text(report.get('source', 'unknown'))}</strong> · OpenCV {_text(report.get('opencv_version'))}</p>
+<header class="hero">
+<p class="eyebrow">OpenCV 5 · bounded agentic vision</p>
+<h1>Evidence Locker</h1>
+<p class="lede">Deterministic visual-change evidence controls what the agent may do next. Every decision remains inspectable, hash-addressed, and bounded by human review.</p>
+<p class="source">Source: <strong>{_text(report.get('source', 'unknown'))}</strong></p>
+<div class="badges"><span>OpenCV {_text(report.get('opencv_version'))}</span><span>{_text(report.get('frame_count', 'unknown'))} frames</span><span>{_text(len(cards))} evidence card(s)</span><span>sealed receipt</span></div>
+</header>
 <section class="decision">
 <h2>{_text(plan.get('action'))}</h2>
 <p>{_text(plan.get('reason'))}</p>
@@ -83,8 +98,8 @@ img{{display:block;max-width:100%;height:auto;border-radius:8px;margin:12px 0}}
 <p>Cited frames: {_text(explanation.get('cited_frame_indices', []))}</p>
 <code>explanation {_text(explanation.get('explanation_sha256'))}</code>
 </section>
-<section>{''.join(card_sections) or '<p>No material change evidence.</p>'}</section>
-<p class="receipt">Report receipt: {_text(receipt)}</p>
+<section class="cards">{''.join(card_sections) or '<p>No material change evidence.</p>'}</section>
+<p class="receipt">Report receipt · {_text(receipt)}</p>
 </main>
 </html>
 """

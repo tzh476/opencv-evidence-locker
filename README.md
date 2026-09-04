@@ -56,6 +56,12 @@ Run the deterministic four-scenario evaluation:
 .venv/bin/python evaluate_synthetic.py
 ```
 
+Build the deterministic read-only demo used by the public project endpoint:
+
+```bash
+.venv/bin/python build_static_demo.py --output-dir docs
+```
+
 Render a standalone human-review page next to the generated overlays:
 
 ```bash
