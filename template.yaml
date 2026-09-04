@@ -1,0 +1,113 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Bounded OpenCV 5 evidence extraction for the OpenCV AI Competition 2026.
+
+Parameters:
+  ArtifactRetentionDays:
+    Type: Number
+    Default: 7
+    MinValue: 1
+    MaxValue: 30
+    Description: Days to retain uploaded videos and generated evidence reports.
+
+Resources:
+  InputBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      LifecycleConfiguration:
+        Rules:
+          - Id: ExpireCompetitionInputs
+            Status: Enabled
+            ExpirationInDays:
+              Ref: ArtifactRetentionDays
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  EvidenceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      LifecycleConfiguration:
+        Rules:
+          - Id: ExpireCompetitionReports
+            Status: Enabled
+            ExpirationInDays:
+              Ref: ArtifactRetentionDays
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+
+  EvidenceFunction:
+    Type: AWS::Serverless::Function
+    Metadata:
+      DockerContext: .
+      Dockerfile: Dockerfile
+      DockerTag: opencv5-evidence-v1
+    Properties:
+      PackageType: Image
+      Architectures:
+        - arm64
+      MemorySize: 2048
+      Timeout: 120
+      ReservedConcurrentExecutions: 2
+      EphemeralStorage:
+        Size: 2048
+      Environment:
+        Variables:
+          EVIDENCE_OUTPUT_BUCKET:
+            Ref: EvidenceBucket
+      Policies:
+        - S3ReadPolicy:
+            BucketName:
+              Ref: InputBucket
+        - S3WritePolicy:
+            BucketName:
+              Ref: EvidenceBucket
+      Events:
+        UploadedVideo:
+          Type: S3
+          Properties:
+            Bucket:
+              Ref: InputBucket
+            Events: s3:ObjectCreated:*
+            Filter:
+              S3Key:
+                Rules:
+                  - Name: prefix
+                    Value: incoming/
+                  - Name: suffix
+                    Value: .mp4
+
+  EvidenceFunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    DependsOn: EvidenceFunction
+    Properties:
+      LogGroupName:
+        Fn::Sub: /aws/lambda/${EvidenceFunction}
+      RetentionInDays: 14
+
+Outputs:
+  InputBucketName:
+    Description: Upload right-cleared MP4 demo inputs under incoming/.
+    Value:
+      Ref: InputBucket
+  EvidenceBucketName:
+    Description: Private bucket containing sealed JSON evidence reports.
+    Value:
+      Ref: EvidenceBucket
+  EvidenceFunctionName:
+    Description: ARM64 OpenCV 5 Lambda function.
+    Value:
+      Ref: EvidenceFunction

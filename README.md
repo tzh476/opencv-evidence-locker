@@ -26,6 +26,18 @@ docker build --platform linux/arm64 -t agentic-vision-evidence-locker:spike .
 docker run --rm --platform linux/arm64 --entrypoint python agentic-vision-evidence-locker:spike -m unittest -v
 ```
 
+Validate the bounded AWS SAM template locally (this creates no AWS resources):
+
+```bash
+.venv/bin/python -m unittest -v test_infrastructure.py
+```
+
+`template.yaml` creates two private AES-256-encrypted S3 buckets, an arm64
+container Lambda, a single `incoming/*.mp4` event boundary, two reserved
+concurrent executions, fourteen-day logs, and configurable 1-30 day object
+retention (seven days by default). The template is deployment preparation only;
+it is not evidence that any AWS resource or endpoint exists.
+
 Analyze a local video without uploading it:
 
 ```bash
@@ -63,10 +75,12 @@ Render a standalone human-review page next to the generated overlays:
 
 ## Next technical boundary
 
-If the spike passes, the smallest credible competition project needs a fresh
-human-review UI, an agent that explains only extracted evidence, an evaluation
-set with false-positive/false-negative measurements, and a meaningful bounded
-AWS component. Those pieces are not implemented or claimed here.
+The local build now has a human-review UI, a fail-closed evidence explanation
+boundary, a deterministic smoke evaluation, a Lambda adapter, and a bounded SAM
+template. The remaining competition-critical boundary is a real AWS deployment
+using right-cleared input, with captured logs, latency, cost, storage receipts,
+and an arranged live demonstration or judge-accessible endpoint. None of those
+deployment claims are made by the local build.
 
 `lambda_handler.py` now provides a locally tested boundary for the proposed AWS
 path: one S3 object event downloads a video, runs the same OpenCV evidence
