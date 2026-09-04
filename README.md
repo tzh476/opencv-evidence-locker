@@ -15,7 +15,8 @@ policy-selected action; it must not invent visual facts that OpenCV did not
 extract. Local and container results below are verified. A live AWS deployment,
 contest award, and payment are not claimed.
 
-- [Three-minute demo video](https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4)
+- [Three-minute competition demo](https://youtu.be/K-sKVB3lXqg)
+- [Source-video release asset](https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4)
 - [Live judge endpoint](https://tzh476.github.io/opencv-evidence-locker/)
 - [Canonical demo evidence JSON](https://tzh476.github.io/opencv-evidence-locker/evidence.json)
 - [Technical report](Evidence-Locker-Technical-Report.pdf)

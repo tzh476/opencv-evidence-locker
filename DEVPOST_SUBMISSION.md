@@ -105,8 +105,8 @@ https://tzh476.github.io/opencv-evidence-locker/evidence.json
 
 ## Demo video
 
-Source asset:
-https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4
+Public or unlisted judging URL:
+https://youtu.be/K-sKVB3lXqg
 
-Devpost requires a public or unlisted YouTube, Vimeo, Facebook Video, or Youku
-URL. Add that URL here only after the account owner uploads the verified asset.
+Source-asset mirror:
+https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4
