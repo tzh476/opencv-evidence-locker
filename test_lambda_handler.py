@@ -3,7 +3,8 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
-from unittest.mock import patch
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
 
 from lambda_handler import _output_key, _source_from_event, handler
 
@@ -53,9 +54,12 @@ class LambdaHandlerTest(unittest.TestCase):
         self.assertRegex(first, r"^reports/[0-9a-f]{64}\.json$")
 
     def test_generated_report_event_is_rejected(self) -> None:
-        with patch.dict(os.environ, {"EVIDENCE_OUTPUT_BUCKET": "evidence"}, clear=True):
+        with patch.dict(os.environ, {"EVIDENCE_OUTPUT_BUCKET": "evidence"}, clear=True), patch(
+            "lambda_handler._runtime"
+        ) as runtime:
             with self.assertRaisesRegex(ValueError, "generated report"):
                 handler(s3_event(bucket="evidence", key="reports/a.json"), None, s3_client=object())
+        runtime.assert_not_called()
 
     def test_handler_downloads_analyzes_and_uploads_encrypted_json(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
@@ -63,10 +67,17 @@ class LambdaHandlerTest(unittest.TestCase):
             source.write_bytes(b"bounded fixture")
             fake_s3 = FakeS3(source)
             fake_report = {"receipt_sha256": "f" * 64, "evidence_cards": []}
+            analyze_video = Mock(return_value=fake_report)
+            seal_report = Mock(return_value="e" * 64)
+            runtime = (
+                SimpleNamespace(__version__="5.0.0"),
+                analyze_video,
+                seal_report,
+            )
             with patch.dict(os.environ, {"EVIDENCE_OUTPUT_BUCKET": "evidence"}, clear=True):
                 with patch(
-                    "lambda_handler.analyze_video", return_value=fake_report
-                ) as analyze_video, patch(
+                    "lambda_handler._runtime", return_value=runtime
+                ), patch(
                     "lambda_handler.LOGGER.info"
                 ) as log_info:
                     result = handler(
@@ -76,7 +87,7 @@ class LambdaHandlerTest(unittest.TestCase):
             self.assertEqual(fake_s3.downloaded, ("input-bucket", "incoming/demo.mp4"))
             self.assertEqual(result["status"], "report_written")
             self.assertEqual(result["report_receipt_sha256"], "f" * 64)
-            self.assertRegex(result["storage_receipt_sha256"], r"^[0-9a-f]{64}$")
+            self.assertEqual(result["storage_receipt_sha256"], "e" * 64)
             assert fake_s3.uploaded is not None
             _, bucket, key, extra = fake_s3.uploaded
             self.assertEqual(bucket, "evidence")
@@ -100,6 +111,7 @@ class LambdaHandlerTest(unittest.TestCase):
             self.assertNotIn("incoming/demo.mp4", json.dumps(messages))
             self.assertFalse(analyze_video.call_args.args[0].exists())
             self.assertFalse(Path(fake_s3.uploaded[0]).exists())
+            seal_report.assert_called_once_with(fake_report)
 
 if __name__ == "__main__":
     unittest.main()

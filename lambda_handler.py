@@ -6,18 +6,29 @@ import hashlib
 import json
 import logging
 import os
+from functools import lru_cache
 from pathlib import Path
 from time import perf_counter
 from typing import Any
 from urllib.parse import unquote_plus
 
-import cv2
-
-from evidence_locker import analyze_video, seal_report
-
-
 LOGGER = logging.getLogger(__name__)
 LOGGER.setLevel(logging.INFO)
+
+
+@lru_cache(maxsize=1)
+def _runtime() -> tuple[Any, Any, Any]:
+    """Load the OpenCV-heavy runtime inside the invocation timeout budget.
+
+    Lambda container initialization has a tighter timeout than a normal function
+    invocation. Deferring OpenCV and the analyzer until the first event keeps
+    module initialization small while caching the imports for warm events.
+    """
+    import cv2
+
+    from evidence_locker import analyze_video, seal_report
+
+    return cv2, analyze_video, seal_report
 
 
 def _source_from_event(event: dict[str, Any]) -> tuple[str, str, str]:
@@ -56,6 +67,8 @@ def handler(
     source_bucket, source_key, source_etag = _source_from_event(event)
     if source_bucket == output_bucket and source_key.startswith("reports/"):
         raise ValueError("refusing to process generated report objects")
+
+    cv2, analyze_video, seal_report = _runtime()
 
     if s3_client is None:
         import boto3
