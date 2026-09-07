@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "id": "davis-change-proxy-v1",
+  "frozen_detector_commit": "d09d96889f30d07e0902830b90cb616a60d4149e",
+  "dataset_url": "https://data.vision.ee.ethz.ch/csergi/share/davis/DAVIS-2017-trainval-480p.zip",
+  "archive_bytes": 832766765,
+  "archive_etag": "\"31a3032d-54c6d0af8b4dc\"",
+  "split_path": "DAVIS/ImageSets/2017/val.txt",
+  "selection": "first 12 sequence names in sorted official validation split",
+  "sequence_count": 12,
+  "frame_pairs": [[0, 5], [10, 15], [20, 25]],
+  "event_threshold": 0.02,
+  "reset_threshold": 0.01,
+  "positive_mask_xor_fraction": 0.005,
+  "negative_mask_xor_fraction": 0.001,
+  "control_brightness_delta": 40,
+  "control_noise_seed": 20260907
+}
