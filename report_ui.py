@@ -75,7 +75,7 @@ h2,h3{{line-height:1.15}} .lede{{max-width:760px;color:var(--muted);font-size:1.
 .badges{{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}} .badges span{{border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--muted);font-size:.82rem}}
 .decision,.card{{background:linear-gradient(145deg,rgba(25,42,64,.96),rgba(13,25,40,.96));border:1px solid var(--line);border-radius:18px;padding:26px;margin:18px 0;box-shadow:0 18px 50px rgba(0,0,0,.18)}}
 .decision{{border-color:#8b713c}} .decision h2{{color:var(--amber);font-family:ui-monospace,monospace;font-size:clamp(1.1rem,3vw,1.65rem)}}
-.cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px}}
+.cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:18px}}
 .card{{margin:0}} code{{display:block;overflow-wrap:anywhere;color:#9dc5ff;margin-top:8px;font-size:.75rem}}
 img{{display:block;width:100%;height:auto;border-radius:12px;margin:18px 0;border:1px solid var(--line)}}
 .receipt{{font-family:ui-monospace,monospace;overflow-wrap:anywhere;color:var(--muted);margin:28px 0}} a{{color:var(--mint)}}

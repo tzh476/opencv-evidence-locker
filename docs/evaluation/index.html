@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evidence Locker · Real-video evaluation</title>
+<style>
+:root{color-scheme:dark;--bg:#08121d;--panel:#101f30;--ink:#edf5fd;--muted:#acc0d3;--mint:#84ebc2;--line:#314459;--orange:#ffb37d}
+*{box-sizing:border-box}body{margin:0;font:16px/1.65 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+main{max-width:1120px;margin:auto;padding:32px 24px 72px}a{color:var(--mint)}nav{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:52px}
+.eyebrow{color:var(--mint);text-transform:uppercase;letter-spacing:.13em;font-size:.75rem;font-weight:700}
+h1{font-size:clamp(2.2rem,5vw,4.5rem);line-height:1.08;letter-spacing:-.04em;max-width:900px;margin:16px 0 24px}
+h2{font-size:1.7rem;line-height:1.25;margin:44px 0 14px}p{max-width:850px}.lede{font-size:1.16rem;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:28px 0}.metric,.control{border:1px solid var(--line);background:var(--panel);border-radius:14px;padding:24px}.metric strong,.control strong{font-size:2.6rem;line-height:1.2;display:block}.metric p,.control p{color:var(--muted);margin:10px 0 0}.warn{border-left:3px solid var(--orange);padding:16px 22px;background:#211e20}.warn strong{color:var(--orange)}
+details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--panel)}summary{padding:16px;cursor:pointer}summary:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--mint);outline-offset:4px}.case>summary{display:flex;align-items:center;gap:16px}.case[open]>summary{border-bottom:1px solid var(--line)}small{color:var(--muted);display:block}.fraction{margin-left:auto;color:var(--muted);font-size:.88rem}.status{border:1px solid currentColor;border-radius:6px;padding:3px 9px;font-size:.8rem;color:var(--mint)}.FN,.FP{color:var(--orange)}
+.case-body,.method{padding:8px 22px 22px}.case-body img{display:block;width:100%;max-width:640px;height:auto;margin:20px auto;border:1px solid var(--line);border-radius:8px}.case-body p{color:var(--muted);font-size:.9rem}dt{font-weight:700}dd{margin:2px 0 16px;color:var(--muted)}code,pre{font: .85rem/1.5 ui-monospace,monospace;overflow-wrap:anywhere}pre{white-space:pre-wrap;padding:16px;max-height:300px;overflow:auto}select{font:inherit;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:9px;margin-left:12px}.tools{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.tools p{margin-left:auto;color:var(--muted)}footer{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:.85rem;color:var(--muted)}.receipt{overflow-wrap:anywhere}.case[hidden]{display:none}
+@media(max-width:650px){main{padding:22px 16px 48px}nav{margin-bottom:32px}.grid{grid-template-columns:1fr}.metric{padding:20px}.case>summary{flex-wrap:wrap;gap:10px}.fraction{margin-left:0;width:100%}.tools p{margin-left:0}select{max-width:100%;margin-left:0;display:block}.case-body{padding:8px 14px 18px}}
+</style><main><nav><a href="../index.html">← Evidence Locker demo</a><a href="results.json">Download all results</a><a href="https://github.com/tzh476/opencv-evidence-locker/tree/main/evaluation">Protocol &amp; reproduction</a></nav>
+<header><p class="eyebrow">Frozen detector · independent annotations · visible failures</p>
+<h1>What does the detector catch?<br>What does it miss?</h1>
+<p class="lede">A small held-out probe of real video: 12 DAVIS sequences, 36 frame pairs, and a detector frozen before the first prediction. Reference labels come from human-drawn foreground masks.</p></header>
+<section class="grid" aria-label="Real-video results">
+<article class="metric"><strong>34 / 36</strong><p>positive foreground changes detected</p></article>
+<article class="metric"><strong>2 missed</strong><p>inspect every miss below</p></article>
+<article class="metric"><strong>0 negatives</strong><p>real-video false-positive rate cannot be estimated from this sample</p></article></section>
+<p class="warn"><strong>Detection recall: 94.4% on this proxy.</strong> This is not overall accuracy, semantic incident detection, or an official DAVIS score. All 36 selected pairs happen to be positive. Constructed controls have their own denominator below.</p>
+<h2>Inspect all 36 real probes</h2><p>Misses appear first. Expand a case to inspect the independent annotation and exact detector evidence.</p>
+<div class="tools"><label for="filter">Show <select id="filter"><option value="all">All real probes</option><option value="FN">Missed changes</option><option value="TP">Detected changes</option></select></label><p id="count" role="status">36 cases</p></div>
+<section aria-label="Real frame-pair cases"><details class="case" data-outcome="FN">
+<summary><span class="status FN">Missed</span>
+<span>drift chicane <small>frames 0 → 5</small></span>
+<span class="fraction">1.23% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/drift-chicane-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for drift chicane">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 1.23% of image area.</dd>
+<dt>Detector</dt><dd>0 card(s). OpenCV found no frame transition above the configured threshold.</dd>
+<dt>Next action</dt><dd><code>complete_no_material_change</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[]</pre></details>
+</div></details><details class="case" data-outcome="FN">
+<summary><span class="status FN">Missed</span>
+<span>drift chicane <small>frames 20 → 25</small></span>
+<span class="fraction">0.56% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/drift-chicane-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for drift chicane">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 0.56% of image area.</dd>
+<dt>Detector</dt><dd>0 card(s). OpenCV found no frame transition above the configured threshold.</dd>
+<dt>Next action</dt><dd><code>complete_no_material_change</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>bike packing <small>frames 0 → 5</small></span>
+<span class="fraction">3.60% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/bike-packing-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for bike packing">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 3.60% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.024172,
+    &quot;changed_regions&quot;: [
+      [
+        276,
+        86,
+        348,
+        394
+      ],
+      [
+        259,
+        200,
+        50,
+        280
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;20879fef6c2430d13851707baa4371bd8b854e0d65225571ceb1f675d19c135a&quot;,
+    &quot;previous_sha256&quot;: &quot;13731d5dcf2f1e6e70278a06fba7ecc9f7110ed7834686efc69a8b69d26be1b7&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>bike packing <small>frames 10 → 15</small></span>
+<span class="fraction">9.65% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/bike-packing-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for bike packing">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 9.65% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.046191,
+    &quot;changed_regions&quot;: [
+      [
+        241,
+        0,
+        397,
+        480
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;035f59781c9d6799302e6d7256e5c575e351009e3c452c35bfdcb6511a0e6bfa&quot;,
+    &quot;previous_sha256&quot;: &quot;d4b4645128431caaffe9d4a8462f23b2670c6437aa18ed28d091a1a52995d3c1&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>bike packing <small>frames 20 → 25</small></span>
+<span class="fraction">9.09% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/bike-packing-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for bike packing">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 9.09% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.052557,
+    &quot;changed_regions&quot;: [
+      [
+        223,
+        38,
+        657,
+        442
+      ],
+      [
+        304,
+        453,
+        104,
+        27
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;1dd93aa3d3d6e16cbaca5b133b6fb8a17e1ebf2563cf27cfb8e4033390b083ad&quot;,
+    &quot;previous_sha256&quot;: &quot;9a2ba088b0f1c183eb1daf9c18282455199269d653606b258b6c3b3451731a59&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>blackswan <small>frames 0 → 5</small></span>
+<span class="fraction">3.91% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/blackswan-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for blackswan">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 3.91% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.078438,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        704,
+        139,
+        150,
+        61
+      ],
+      [
+        243,
+        168,
+        97,
+        35
+      ],
+      [
+        544,
+        268,
+        232,
+        176
+      ],
+      [
+        719,
+        384,
+        65,
+        33
+      ],
+      [
+        786,
+        410,
+        68,
+        70
+      ],
+      [
+        674,
+        427,
+        62,
+        53
+      ],
+      [
+        726,
+        435,
+        48,
+        45
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;b88f2ec6e695d40b193d0ef038457df20f47dc14dc74f30403c90cf7883fd1e0&quot;,
+    &quot;previous_sha256&quot;: &quot;6544f8b98ca68fdd88f6ce5c706a8a6ad71e07c574eb87f0eacabd04549ff6f8&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>blackswan <small>frames 10 → 15</small></span>
+<span class="fraction">3.95% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/blackswan-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for blackswan">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 3.95% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.092804,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        62,
+        152,
+        110,
+        46
+      ],
+      [
+        564,
+        277,
+        90,
+        65
+      ],
+      [
+        651,
+        315,
+        80,
+        51
+      ],
+      [
+        571,
+        323,
+        82,
+        97
+      ],
+      [
+        528,
+        361,
+        48,
+        78
+      ],
+      [
+        662,
+        375,
+        62,
+        66
+      ],
+      [
+        392,
+        445,
+        62,
+        35
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;fe21230a575922e86609a95ca2d7c1b750f6684ccdad90e76b8b0dc74e361b07&quot;,
+    &quot;previous_sha256&quot;: &quot;3dd8fce0d295abd39f889cc36a009515be7a6d323c5b779a672c5be82a03646a&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>blackswan <small>frames 20 → 25</small></span>
+<span class="fraction">2.60% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/blackswan-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for blackswan">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 2.60% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.081924,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        417
+      ],
+      [
+        795,
+        167,
+        59,
+        31
+      ],
+      [
+        588,
+        216,
+        76,
+        63
+      ],
+      [
+        0,
+        334,
+        283,
+        107
+      ],
+      [
+        546,
+        351,
+        86,
+        57
+      ],
+      [
+        718,
+        367,
+        38,
+        56
+      ],
+      [
+        0,
+        411,
+        84,
+        50
+      ],
+      [
+        548,
+        422,
+        84,
+        58
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;41f538b0c0c3631ab71f392097329116a633054f4f5accd8cdda4506c7aa8ae8&quot;,
+    &quot;previous_sha256&quot;: &quot;925f484d908b4c069b75151eead42e7988356a4abf7affcadf950bfc7f532319&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>bmx trees <small>frames 0 → 5</small></span>
+<span class="fraction">2.74% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/bmx-trees-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for bmx trees">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 2.74% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.122571,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        278,
+        49
+      ],
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        0,
+        263,
+        79,
+        56
+      ],
+      [
+        235,
+        376,
+        165,
+        104
+      ],
+      [
+        0,
+        444,
+        51,
+        36
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;5c729c95e5aec3de03b075d5d6b3e681e1b730061d5d252dff7e557cae9848f6&quot;,
+    &quot;previous_sha256&quot;: &quot;85c9cfbb96c6d29ba931dc5f856aa802248e6908abb25072f8a3791a2a3d419f&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>bmx trees <small>frames 10 → 15</small></span>
+<span class="fraction">2.82% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/bmx-trees-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for bmx trees">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 2.82% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.12493,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        239,
+        0,
+        117,
+        37
+      ],
+      [
+        0,
+        226,
+        210,
+        109
+      ],
+      [
+        127,
+        255,
+        95,
+        38
+      ],
+      [
+        0,
+        295,
+        68,
+        40
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;a65511d84b8145211ab4671f24c36d234d6c5d2d28719bb737ad81e197b3cd01&quot;,
+    &quot;previous_sha256&quot;: &quot;029a8678aa8be969bbea1bb77ea1d1158553045664f97afc74ff8d3bee383f33&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>bmx trees <small>frames 20 → 25</small></span>
+<span class="fraction">2.91% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/bmx-trees-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for bmx trees">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 2.91% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.14026,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        39,
+        77
+      ],
+      [
+        0,
+        0,
+        206,
+        326
+      ],
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        632,
+        0,
+        222,
+        192
+      ],
+      [
+        120,
+        64,
+        83,
+        127
+      ],
+      [
+        716,
+        456,
+        138,
+        24
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;5755d34fc66970709c98111a0e32c8d1590f7c736dbd9d313b3fdc95c8590ced&quot;,
+    &quot;previous_sha256&quot;: &quot;660904c9861ab739f43d98529839e302ec85507f51d0861e7c087a955cb40cc9&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>breakdance <small>frames 0 → 5</small></span>
+<span class="fraction">6.33% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/breakdance-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for breakdance">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 6.33% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.05001,
+    &quot;changed_regions&quot;: [
+      [
+        97,
+        0,
+        324,
+        459
+      ],
+      [
+        0,
+        112,
+        82,
+        177
+      ],
+      [
+        784,
+        146,
+        66,
+        59
+      ],
+      [
+        433,
+        196,
+        55,
+        90
+      ],
+      [
+        0,
+        285,
+        119,
+        163
+      ],
+      [
+        445,
+        306,
+        53,
+        111
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;8dceede9fbf006de0a1cda112185925eb0c8a2f67c990e759abda0630030d5c3&quot;,
+    &quot;previous_sha256&quot;: &quot;f3b630cadeb8e8ab011a00126d7cbcdaafe30bfd5371d711752fcef534c2d99e&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>breakdance <small>frames 10 → 15</small></span>
+<span class="fraction">9.16% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/breakdance-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for breakdance">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 9.16% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.06353,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        91,
+        573,
+        389
+      ],
+      [
+        0,
+        117,
+        120,
+        117
+      ],
+      [
+        719,
+        125,
+        58,
+        90
+      ],
+      [
+        661,
+        182,
+        59,
+        101
+      ],
+      [
+        388,
+        192,
+        100,
+        68
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;e4bdc733c10e39f60589c5484f96c7e1d17b54438b5797fec495f4215dc94bbb&quot;,
+    &quot;previous_sha256&quot;: &quot;67eae5e23b921da85aca74ff34827731c02a343082661da896fbb6d03f76ed2e&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>breakdance <small>frames 20 → 25</small></span>
+<span class="fraction">9.61% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/breakdance-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for breakdance">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 9.61% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.055779,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        32,
+        601,
+        423
+      ],
+      [
+        719,
+        103,
+        67,
+        112
+      ],
+      [
+        0,
+        122,
+        93,
+        138
+      ],
+      [
+        648,
+        169,
+        78,
+        76
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;8e8afff708355d656345aadcac9d1375a19dd5772b61f855beb21d014f0c8fe1&quot;,
+    &quot;previous_sha256&quot;: &quot;54b8022e9a377089087134f7297a5da685f38ae081a26e9dcd9f8b544b6a7c60&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>camel <small>frames 0 → 5</small></span>
+<span class="fraction">7.27% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/camel-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for camel">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 7.27% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.105559,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        0,
+        372,
+        76,
+        46
+      ],
+      [
+        771,
+        394,
+        83,
+        41
+      ],
+      [
+        767,
+        446,
+        87,
+        24
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;9a9d54427a94e4f0b4fb8f414906027bc53eb1914f107617ad7ae58e3e9545ce&quot;,
+    &quot;previous_sha256&quot;: &quot;10d0a7dc4e35df3c069c49b74e5a9c6cc8862f67ff0a230aeec683d3084dda95&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>camel <small>frames 10 → 15</small></span>
+<span class="fraction">4.45% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/camel-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for camel">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 4.45% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.08573,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        36,
+        72
+      ],
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        710,
+        412,
+        144,
+        33
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;5d4df96ff0eac412b9ce264e0e0346fe80b15b8af160d6b20f8dded36dec4509&quot;,
+    &quot;previous_sha256&quot;: &quot;dbaba96f67c70b93e4d2a0228f938e63a2d059f09abad7fd9ca14ca95ac5448a&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>camel <small>frames 20 → 25</small></span>
+<span class="fraction">6.38% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/camel-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for camel">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 6.38% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.113612,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        669,
+        400,
+        133,
+        27
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;3ce8d3abe271b61deecb79f80635c9e86f2948432071220bf708a2058238608b&quot;,
+    &quot;previous_sha256&quot;: &quot;e72d368d9bb8b1ff5fcae9f04dafc0ef172a0e198c41cb33e65cef4b3e4749df&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>car roundabout <small>frames 0 → 5</small></span>
+<span class="fraction">2.43% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/car-roundabout-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for car roundabout">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 2.43% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.13338,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        358
+      ],
+      [
+        490,
+        282,
+        113,
+        70
+      ],
+      [
+        0,
+        359,
+        376,
+        42
+      ],
+      [
+        587,
+        408,
+        267,
+        15
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;4a13b3093eb0f5cb7240c7b8b4818435db9c022a8e7133ab8697470d979cb742&quot;,
+    &quot;previous_sha256&quot;: &quot;62e3dbf66819620208a9207a85cb87f519bd03149d0360e952796ac9ea0ac9e8&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>car roundabout <small>frames 10 → 15</small></span>
+<span class="fraction">0.78% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/car-roundabout-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for car roundabout">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 0.78% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.122312,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        359
+      ],
+      [
+        0,
+        389,
+        683,
+        28
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;5dacbffc6e01ed16232b40671762a941bf5c2f8b842559cbb9c235df4b7b90d6&quot;,
+    &quot;previous_sha256&quot;: &quot;2b8f460883b34e16b3dcb253d7e620627b20057f992bc4f1210bf2f3bec31ac4&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>car roundabout <small>frames 20 → 25</small></span>
+<span class="fraction">0.68% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/car-roundabout-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for car roundabout">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 0.68% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.129362,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        352
+      ],
+      [
+        314,
+        273,
+        326,
+        88
+      ],
+      [
+        148,
+        288,
+        369,
+        78
+      ],
+      [
+        0,
+        409,
+        584,
+        14
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;d66d00b8364de66ae604aac2faaee47ae64a73c3df7ddda6510993f3ec91655d&quot;,
+    &quot;previous_sha256&quot;: &quot;d9edda987f014b271498c872c834e60a4b6f5af7f89455f5e42fa6d897abdeb8&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>car shadow <small>frames 0 → 5</small></span>
+<span class="fraction">4.69% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/car-shadow-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for car shadow">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 4.69% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.088511,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        135,
+        36
+      ],
+      [
+        0,
+        0,
+        854,
+        333
+      ],
+      [
+        164,
+        0,
+        115,
+        53
+      ],
+      [
+        280,
+        0,
+        59,
+        61
+      ],
+      [
+        114,
+        69,
+        31,
+        70
+      ],
+      [
+        143,
+        69,
+        141,
+        65
+      ],
+      [
+        0,
+        357,
+        335,
+        19
+      ],
+      [
+        518,
+        362,
+        261,
+        15
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;5210b807cb709228f34ca6b03e58eea45912c48f92ce87adb525de4941b6f5c4&quot;,
+    &quot;previous_sha256&quot;: &quot;d03fa65f5b71caffc525d35357c537b4e18ec785204691eb61e57de3cdd43126&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>car shadow <small>frames 10 → 15</small></span>
+<span class="fraction">1.55% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/car-shadow-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for car shadow">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 1.55% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.086843,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        375
+      ],
+      [
+        119,
+        0,
+        196,
+        52
+      ],
+      [
+        348,
+        0,
+        49,
+        62
+      ],
+      [
+        411,
+        4,
+        75,
+        72
+      ],
+      [
+        272,
+        77,
+        63,
+        63
+      ],
+      [
+        716,
+        317,
+        138,
+        45
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;a95952946cbfce8495b4c53859b7bc5995753f6b75549a046d136696706f80d2&quot;,
+    &quot;previous_sha256&quot;: &quot;5b3c592c0908ae6c78b4e08223830cbb8d572490604e718191dd0c7df583bda2&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>car shadow <small>frames 20 → 25</small></span>
+<span class="fraction">1.16% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/car-shadow-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for car shadow">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 1.16% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.09699,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        378
+      ],
+      [
+        171,
+        0,
+        86,
+        45
+      ],
+      [
+        262,
+        0,
+        181,
+        59
+      ],
+      [
+        475,
+        0,
+        49,
+        68
+      ],
+      [
+        539,
+        13,
+        37,
+        62
+      ],
+      [
+        576,
+        19,
+        41,
+        64
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;456458914f9cb8b1a7658ba79b5aff3e829386b3cbca4f04a7300a6fae3647ce&quot;,
+    &quot;previous_sha256&quot;: &quot;879e91783bb123b9b45d5b087032312ecd2e76413ab10a92041903d72de9d062&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>cows <small>frames 0 → 5</small></span>
+<span class="fraction">3.16% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/cows-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for cows">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 3.16% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.071568,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        431,
+        0,
+        89,
+        58
+      ],
+      [
+        626,
+        325,
+        228,
+        155
+      ],
+      [
+        596,
+        438,
+        47,
+        42
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;894ecfad43293c30f033f4653c9fd228be8934c8dbcd531571747fe94cec2182&quot;,
+    &quot;previous_sha256&quot;: &quot;720a86212910a3359e277f56fe7dfa4ce7e772dfbbb0ac3b0237f33c210eb7b9&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>cows <small>frames 10 → 15</small></span>
+<span class="fraction">1.71% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/cows-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for cows">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 1.71% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.040738,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        25,
+        854,
+        455
+      ],
+      [
+        784,
+        331,
+        70,
+        43
+      ],
+      [
+        675,
+        394,
+        148,
+        86
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;656a4ff568c86b225b41f0ae19d63fa3f7ad8269fe4b6fd7bfa75ea6d6a35a5d&quot;,
+    &quot;previous_sha256&quot;: &quot;576f0b1c8b9358f8b0920c7e483c4223213c4ac33f9ed23e56c81b73428ea826&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>cows <small>frames 20 → 25</small></span>
+<span class="fraction">4.15% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/cows-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for cows">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 4.15% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.084235,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;5f23ccbd77ce8803d67829961070b86bb1a8a90f3bc9580bf37ee2e5bff938e8&quot;,
+    &quot;previous_sha256&quot;: &quot;e74bb2c752662f96f6210d3cd47dddc21d2085af818a6e8c615f4130f83dd7fe&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dance twirl <small>frames 0 → 5</small></span>
+<span class="fraction">4.06% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dance-twirl-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for dance twirl">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 4.06% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.10948,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        437
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;bc7622af6e484890835b45136cafaaea2fea73fd1ada7d6c879629e6cf2e2f53&quot;,
+    &quot;previous_sha256&quot;: &quot;36685274794859438def6a0cddee0ff47dc8fc69c2b3310a60e1b42661abf0bb&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dance twirl <small>frames 10 → 15</small></span>
+<span class="fraction">5.56% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dance-twirl-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for dance twirl">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 5.56% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.130528,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        473
+      ],
+      [
+        381,
+        386,
+        53,
+        43
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;a4fc3631083271651aab2816b1ac5cad84d90fbc97f09cde5ce69ba582470500&quot;,
+    &quot;previous_sha256&quot;: &quot;a99f62fed3c836261233a5e43b43fedbb211100cd16de6bc3c6ba0f4c88d593b&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dance twirl <small>frames 20 → 25</small></span>
+<span class="fraction">4.85% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dance-twirl-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for dance twirl">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 4.85% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.121997,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        431
+      ],
+      [
+        363,
+        404,
+        68,
+        55
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;6b096645b528fab3555f45e39f96af245b017e2c362d1dab59adbe0086c549e8&quot;,
+    &quot;previous_sha256&quot;: &quot;c97544aee98a8c86bd5b63f6662b17166e8c1ab920f492c3c6575eb29639fcbf&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dog <small>frames 0 → 5</small></span>
+<span class="fraction">7.58% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dog-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for dog">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 7.58% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.087323,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        221,
+        0,
+        133,
+        60
+      ],
+      [
+        356,
+        0,
+        133,
+        72
+      ],
+      [
+        0,
+        51,
+        149,
+        74
+      ],
+      [
+        762,
+        68,
+        92,
+        86
+      ],
+      [
+        124,
+        233,
+        82,
+        57
+      ],
+      [
+        569,
+        433,
+        97,
+        47
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;6645c6ebeac82ba30a08452c7bfabfe9c819f327ff1469b6837d6b806a0aabf7&quot;,
+    &quot;previous_sha256&quot;: &quot;883d5e7c1f808e8604e787cc7177fbae91c6ffaff19a8a1256f21a2e1595fe62&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dog <small>frames 10 → 15</small></span>
+<span class="fraction">6.46% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dog-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for dog">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 6.46% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.084508,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        689,
+        62,
+        134,
+        105
+      ],
+      [
+        0,
+        77,
+        129,
+        68
+      ],
+      [
+        0,
+        241,
+        190,
+        227
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;6850325721eaa160ff52bd5ee9af992492eaff8032145b9eb94ab26671ecbeb3&quot;,
+    &quot;previous_sha256&quot;: &quot;6cf7b71dc6b732d57e376284f90f5aed9141862e671497a416758d4755ac0fbe&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dog <small>frames 20 → 25</small></span>
+<span class="fraction">7.23% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dog-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for dog">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 7.23% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.098204,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        0,
+        299,
+        30
+      ],
+      [
+        0,
+        0,
+        854,
+        480
+      ],
+      [
+        756,
+        42,
+        95,
+        107
+      ],
+      [
+        0,
+        250,
+        305,
+        228
+      ],
+      [
+        131,
+        262,
+        63,
+        59
+      ],
+      [
+        306,
+        370,
+        80,
+        76
+      ],
+      [
+        387,
+        375,
+        66,
+        47
+      ],
+      [
+        804,
+        416,
+        50,
+        64
+      ],
+      [
+        162,
+        425,
+        71,
+        55
+      ],
+      [
+        41,
+        429,
+        55,
+        51
+      ],
+      [
+        316,
+        444,
+        110,
+        36
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;2a84b45a7764cc6fa2394792df0473b8622f5b60a0f18ba642ca8fda21425d4a&quot;,
+    &quot;previous_sha256&quot;: &quot;fd0677f57a9da6a1e84872bafa2a5006466728c7d158bf160d7870927f71a357&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dogs jump <small>frames 0 → 5</small></span>
+<span class="fraction">2.54% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dogs-jump-00000-00005.png" width="640" alt="DAVIS foreground annotation pair for dogs jump">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 2.54% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.029792,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        126,
+        854,
+        331
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;f05395bc46f3627fe18449d656bf37283f9419e7c93c06db6ceba1f92e6c706e&quot;,
+    &quot;previous_sha256&quot;: &quot;2bd517ae8a17ddfe98b28d471978065cb1dec3f551d924fd6caebad3254f8489&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dogs jump <small>frames 10 → 15</small></span>
+<span class="fraction">9.03% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dogs-jump-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for dogs jump">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 9.03% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.053739,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        139,
+        854,
+        248
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;a31d3d316c04d4f8baea820e6a45cfc273331465bc31fe847efebb3e5aff0430&quot;,
+    &quot;previous_sha256&quot;: &quot;687c86236f1562ee5339b5f78618c53caf38948f29af38153a8455e1170cdb12&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>dogs jump <small>frames 20 → 25</small></span>
+<span class="fraction">5.56% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/dogs-jump-00020-00025.png" width="640" alt="DAVIS foreground annotation pair for dogs jump">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 5.56% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.031946,
+    &quot;changed_regions&quot;: [
+      [
+        0,
+        150,
+        541,
+        237
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;0c4b3db68327b61023962afc2fcb0535ccdf1b175ea2191d3bb48b0342e1729b&quot;,
+    &quot;previous_sha256&quot;: &quot;3b00775954315169592708d14e1a423672d94495b1046d31ed23c638503f84dd&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details><details class="case" data-outcome="TP">
+<summary><span class="status TP">Detected</span>
+<span>drift chicane <small>frames 10 → 15</small></span>
+<span class="fraction">1.29% foreground change</span></summary>
+<div class="case-body"><p>Human annotation: before (left), after (right). Orange boxes show the detector's regions projected onto the annotation. These diagrams contain no original camera pixels.</p>
+<img loading="lazy" src="annotations/drift-chicane-00010-00015.png" width="640" alt="DAVIS foreground annotation pair for drift chicane">
+<dl><dt>Reference</dt><dd>Foreground occupancy changed by 1.29% of image area.</dd>
+<dt>Detector</dt><dd>1 card(s). OpenCV found localized changes that are reviewable without an immediate escalation.</dd>
+<dt>Next action</dt><dd><code>seal_evidence_for_agent_summary</code></dd></dl>
+<details><summary>Inspect exact evidence</summary><pre>[
+  {
+    &quot;change_score&quot;: 0.024109,
+    &quot;changed_regions&quot;: [
+      [
+        570,
+        25,
+        172,
+        168
+      ],
+      [
+        277,
+        199,
+        186,
+        63
+      ]
+    ],
+    &quot;frame_index&quot;: 1,
+    &quot;frame_sha256&quot;: &quot;8493f7109c77a7474774b62c8c2a6773b19d7c57e4e31eb0bdd7736e2a08b1d0&quot;,
+    &quot;previous_sha256&quot;: &quot;77cfe2b78d10cffd4664bee96d5cbfa3d3ac1a628fed60825b092b93cc8fd84c&quot;,
+    &quot;timestamp_ms&quot;: 1000
+  }
+]</pre></details>
+</div></details></section>
+<h2>How nuisance changes behave</h2><p>36 constructed controls based on real frames. Foreground geometry stays fixed. Lighting changes are still pixel changes, so a trigger is a nuisance under this proxy, not a broken pixel-difference calculation.</p>
+<section class="grid"><article class="control"><h3>Exact repeat</h3><p>The same real frame twice.</p><strong>0 / 12</strong><p>nuisance triggers under the foreground proxy</p></article><article class="control"><h3>Small sensor-like noise</h3><p>Seeded ±2 pixel intensity perturbation; constructed control.</p><strong>0 / 12</strong><p>nuisance triggers under the foreground proxy</p></article><article class="control"><h3>Lighting change</h3><p>+40 intensity with clipping; geometry unchanged. Constructed control.</p><strong>12 / 12</strong><p>nuisance triggers under the foreground proxy</p></article></section>
+<p class="warn"><strong>Operational limit:</strong> changing illumination can trigger review even when foreground geometry has not moved. Small foreground movement can also be missed. Use these cards for assisted review; do not treat a quiet result as proof that nothing happened.</p>
+<h2>How to interpret the evidence</h2>
+<details><summary>Sampling, labels, and leakage controls</summary><div class="method"><p>First 12 alphabetically sorted names from DAVIS 2017 validation; fixed frame pairs (0,5), (10,15), (20,25). No selection by score. Human foreground occupancy XOR ≥0.5% is positive; ≤0.1% is negative; the middle interval is unscored. There were 0 ambiguous pairs.</p><p>Detector commit <code>d09d96889f30d07e0902830b90cb616a60d4149e</code>; event threshold 0.02, reset threshold 0.01. Pair probes reset hysteresis each time. Sequence-macro recall is 94.4% across 12 sequences; pairs within a sequence are correlated. This public validation subset was unused in this project's prior tuning but is not a private test set. No thresholds were adjusted after seeing results.</p></div></details>
+<details><summary>Reproduce and verify the receipt</summary><div class="method"><pre>python fetch_evaluation_data.py --output-dir /tmp/davis-probes
+python evaluate_heldout.py --data-dir /tmp/davis-probes --output-dir /tmp/heldout-results
+python build_evaluation_page.py --results /tmp/heldout-results/results.json</pre><p>Source files are checksum-verified. All per-pair predictions, source hashes, dependency versions, and the protocol hash are in <a href="results.json">results.json</a>. The receipt hashes canonical JSON excluding its own receipt_sha256 field.</p><p class="receipt">Receipt: <code>64ee986bf1bcd1f5949b7064d6d5754c05b1aa73592f10e5a7b80aac3fef3c0e</code></p></div></details>
+<details><summary>What this evaluation does not establish</summary><div class="method"><p>No object identity, intent, incident classification, production accuracy, localization IoU, real-world review-time savings, or AWS latency is measured here. The annotations define a different target from global pixel intensity. Camera and background motion can disagree with that target. Future tuning on these examples requires a new holdout.</p></div></details>
+<footer><p>Annotation diagrams adapted from DAVIS 2017, by Jordi Pont-Tuset, Federico Perazzi, Sergi Caelles, Pablo Arbeláez, Alexander Sorkine-Hornung and Luc Van Gool. <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. Changes: binary foreground union, colorization, side-by-side layout, detector-box overlay and resizing. Original camera frames are not redistributed.</p><p><a href="https://davischallenge.org/davis2017/code.html">Official dataset</a> · <a href="https://davischallenge.org/challenge2017/rulesdates.html">Annotation license</a> · Perazzi et al., CVPR 2016; Pont-Tuset et al., arXiv:1704.00675, 2017. No endorsement implied.</p></footer></main>
+<script>const filter=document.querySelector('#filter');filter.addEventListener('change',()=>{let count=0;for(const row of document.querySelectorAll('.case')){row.hidden=filter.value!=='all'&&row.dataset.outcome!==filter.value;if(!row.hidden)count++;}document.querySelector('#count').textContent=count+' cases';});</script></html>

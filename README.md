@@ -18,11 +18,47 @@ No persistent AWS endpoint, contest award, or payment is claimed.
 - [Three-minute competition demo](https://youtu.be/K-sKVB3lXqg)
 - [Source-video release asset](https://github.com/tzh476/opencv-evidence-locker/releases/download/demo-v1/opencv-evidence-locker.mp4)
 - [Live judge endpoint](https://tzh476.github.io/opencv-evidence-locker/)
+- [Real-video evaluation: all 36 probes and failures](https://tzh476.github.io/opencv-evidence-locker/evaluation/)
 - [Canonical demo evidence JSON](https://tzh476.github.io/opencv-evidence-locker/evidence.json)
 - [Technical report](Evidence-Locker-Technical-Report.pdf)
 - [Bounded AWS architecture](architecture.svg)
 
-## Verify
+## Real-video evaluation — 2026-09-07
+
+The detector was frozen at `d09d968` before evaluating 36 previously unused frame
+pairs from 12 DAVIS 2017 validation sequences. The selection and reference-label
+rules were committed first in [the protocol](evaluation/PROTOCOL.md).
+Human-drawn foreground masks provide an independent **foreground-change proxy**.
+
+| Separate cohort | Result | Interpretation |
+| --- | --- | --- |
+| 36 real frame pairs | 34 detected, 2 missed; recall 94.4% | All 36 references are positive; real false-positive rate is unknown. |
+| 12 exact-repeat controls | 0 nuisance triggers | Constructed controls, not real static-video coverage. |
+| 12 ±2 intensity-noise controls | 0 nuisance triggers | Bounded perturbations only. |
+| 12 +40 brightness controls | 12 nuisance triggers | Illumination is a measured weakness under the foreground proxy. |
+
+Both misses are in `drift-chicane`, frames 0→5 and 20→25. No threshold was tuned
+after seeing these results. Pairs from a sequence are correlated, and pair probes
+reset hysteresis. These are neither production accuracy nor official DAVIS
+segmentation scores. The public explorer includes every outcome, independent
+annotation diagrams, exact detector actions, and source hashes; original camera
+frames remain local. Annotation reuse and attribution are documented in the
+protocol. Future tuning requires a fresh holdout.
+
+```bash
+.venv/bin/python fetch_evaluation_data.py --output-dir /tmp/davis-probes
+.venv/bin/python evaluate_heldout.py --data-dir /tmp/davis-probes --output-dir /tmp/heldout-results
+.venv/bin/python build_evaluation_page.py --results /tmp/heldout-results/results.json
+```
+
+The downloader requests only the 144 selected JPEG/mask files from the official
+archive, checks its ETag and byte range, and records each file's SHA-256. The
+evaluator verifies all files before predicting. Two full local runs produced
+identical reports and annotation diagrams. The original synthetic demo receipt
+is unchanged. The local suite now passes **38 tests**; the two hosted-artifact
+tests are intentionally excluded from the smaller Lambda runtime image.
+
+## Local verification
 
 ```bash
 python3 -m venv .venv

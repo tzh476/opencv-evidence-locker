@@ -64,7 +64,7 @@ action set or cite a frame that OpenCV did not extract.
 
 ### Evaluation
 
-A clean OpenCV 5 environment passes all 32 tests. The seeded four-scenario suite
+A clean OpenCV 5 environment passes all 38 tests. The seeded four-scenario suite
 covers no change, localized change, full-frame change, and low-amplitude noise:
 2 true positives, 2 true negatives, 0 false positives, 0 false negatives, and
 4/4 correct downstream actions. This is an engineering smoke test, not a claim
@@ -76,6 +76,17 @@ produced identical evidence and the same report receipt. A first run on the Big
 Buck Bunny sample exposed an event flood of 56 cards across 125 frames;
 hysteresis and regression tests reduced it to one card while preserving re-arm
 after a quiet frame.
+
+On September 7 we added a frozen held-out foreground-change evaluation: 36 frame
+pairs from 12 DAVIS 2017 validation sequences, selected before predictions, with
+reference labels derived from human foreground masks. The unchanged detector
+found 34 positive pairs and missed two (94.4% recall). All 36 references were
+positive, so real-video false-positive rate remains unknown. Separate constructed
+controls produced no triggers for exact repeats or ±2 noise (12 each), but all
+12 brightness-shift controls triggered. Every result, failure, annotation diagram,
+source hash and the frozen protocol is inspectable at the live evaluation page:
+https://tzh476.github.io/opencv-evidence-locker/evaluation/ . This is a small
+foreground-change proxy, not semantic incident accuracy or an official DAVIS score.
 
 ### Challenges and limitations
 
@@ -89,8 +100,8 @@ dataset, calibrated thresholds, and measured precision/recall tradeoffs.
 
 ### What's next
 
-The next milestone is a larger right-cleared held-out evaluation and cold-start
-optimization. The first live Lambda cold initialization reached the initialization
+The next milestone is natural negative-video evaluation and cold-start
+measurement. The first live Lambda cold initialization reached the initialization
 timeout before AWS retried and completed the event, so reducing image/init cost is
 more valuable than keeping an idle demo stack online. We will preserve the same
 evidence-first, human-controlled policy boundary.

@@ -1,0 +1,3686 @@
+{
+  "by_sequence": {
+    "bike-packing": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "blackswan": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "bmx-trees": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "breakdance": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "camel": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "car-roundabout": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "car-shadow": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "cows": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "dance-twirl": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "dog": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "dogs-jump": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 0,
+      "TP": 3,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    },
+    "drift-chicane": {
+      "FN": 2,
+      "FP": 0,
+      "TN": 0,
+      "TP": 1,
+      "ambiguous": 0,
+      "precision": 1.0,
+      "recall": 0.3333333333333333,
+      "scored": 3,
+      "specificity": null,
+      "total": 3
+    }
+  },
+  "control_results": [
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "bike-packing-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "bike-packing"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "bike-packing-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "bike-packing"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.15529,
+          "changed_regions": [
+            [
+              0,
+              0,
+              910,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "b4dc710696fcacec9c8425a9e4285a0577ee7eb7edf67af0b29858e13434952d",
+          "previous_sha256": "13731d5dcf2f1e6e70278a06fba7ecc9f7110ed7834686efc69a8b69d26be1b7",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "bike-packing-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bike-packing"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "blackswan-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "blackswan"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "blackswan-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "blackswan"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.155828,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "a913f1b6a98bef4a0305bca3b21b2683b44a11affc2a6a4c753a43b89540e455",
+          "previous_sha256": "6544f8b98ca68fdd88f6ce5c706a8a6ad71e07c574eb87f0eacabd04549ff6f8",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "blackswan-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "blackswan"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "bmx-trees-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "bmx-trees"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "bmx-trees-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "bmx-trees"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.154293,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "e781f1100c0ff127be8cdda9e16ef6d148f3f0ff01e342b254ba18d27dd95879",
+          "previous_sha256": "85c9cfbb96c6d29ba931dc5f856aa802248e6908abb25072f8a3791a2a3d419f",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "bmx-trees-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bmx-trees"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "breakdance-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "breakdance"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "breakdance-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "breakdance"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.151451,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "33aa1b2ca78f41a01e40c711b561e0e9acc0ec6a87c3b9833a2a7421c5b84ddd",
+          "previous_sha256": "f3b630cadeb8e8ab011a00126d7cbcdaafe30bfd5371d711752fcef534c2d99e",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "breakdance-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "breakdance"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "camel-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "camel"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "camel-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "camel"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.140186,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "f69b7dda7cdcd36259b38af9f8b3db758b2b3f0542535763cc60aa9cfd616de9",
+          "previous_sha256": "10d0a7dc4e35df3c069c49b74e5a9c6cc8862f67ff0a230aeec683d3084dda95",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "camel-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "camel"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "car-roundabout-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "car-roundabout"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "car-roundabout-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "car-roundabout"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.15353,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "6cae5f2145afed5bf2d26ee6d6a754e054c2b209306580e44cf2ebfdcf4c197e",
+          "previous_sha256": "62e3dbf66819620208a9207a85cb87f519bd03149d0360e952796ac9ea0ac9e8",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "car-roundabout-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-roundabout"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "car-shadow-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "car-shadow"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "car-shadow-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "car-shadow"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.147413,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "fa10696651ef85caa245044fc1b78dbbab95749a814e1f2fdf84a4f3216cace5",
+          "previous_sha256": "d03fa65f5b71caffc525d35357c537b4e18ec785204691eb61e57de3cdd43126",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "car-shadow-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-shadow"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "cows-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "cows"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "cows-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "cows"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.155671,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "792dceb456db467beb6285ef8dfd42c5ef0c41392ef7192bc9147704902e7b94",
+          "previous_sha256": "720a86212910a3359e277f56fe7dfa4ce7e772dfbbb0ac3b0237f33c210eb7b9",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "cows-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "cows"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "dance-twirl-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "dance-twirl"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "dance-twirl-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "dance-twirl"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.156074,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "64e8712db19493b65128687e6287275e1000690a88be73cf322c12a71b3f3e23",
+          "previous_sha256": "36685274794859438def6a0cddee0ff47dc8fc69c2b3310a60e1b42661abf0bb",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "dance-twirl-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dance-twirl"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "dog-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "dog"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "dog-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "dog"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.156356,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "eef1cc8c1aeb33ad4568b0c9ad292a169ca7c8a3be215f2f1d09d04876568371",
+          "previous_sha256": "883d5e7c1f808e8604e787cc7177fbae91c6ffaff19a8a1256f21a2e1595fe62",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "dog-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dog"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "dogs-jump-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "dogs-jump"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "dogs-jump-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "dogs-jump"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.153004,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "ad4e910c70ebb4a0cb7b631db862054bc053770bbd91116f688c5e2fbf9d9e55",
+          "previous_sha256": "2bd517ae8a17ddfe98b28d471978065cb1dec3f551d924fd6caebad3254f8489",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "dogs-jump-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dogs-jump"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "drift-chicane-exact_repeat",
+      "kind": "exact_repeat",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "drift-chicane"
+    },
+    {
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": false,
+      "id": "drift-chicane-sensor_noise",
+      "kind": "sensor_noise",
+      "outcome": "TN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "drift-chicane"
+    },
+    {
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.154901,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "ef17ff1970c9797610286de1b900b65583b1770fe54c5e575c3e968666c5d5bd",
+          "previous_sha256": "410b234dc9a1afa4c8ff05b3d7d1ea9e733901486222944b432a50cab79f5bf0",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": false,
+      "id": "drift-chicane-brightness_shift",
+      "kind": "brightness_shift",
+      "outcome": "FP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "drift-chicane"
+    }
+  ],
+  "controls": {
+    "FN": 0,
+    "FP": 12,
+    "TN": 24,
+    "TP": 0,
+    "ambiguous": 0,
+    "precision": 0.0,
+    "recall": null,
+    "scored": 36,
+    "specificity": 0.6666666666666666,
+    "total": 36
+  },
+  "controls_by_kind": {
+    "brightness_shift": {
+      "FN": 0,
+      "FP": 12,
+      "TN": 0,
+      "TP": 0,
+      "ambiguous": 0,
+      "precision": 0.0,
+      "recall": null,
+      "scored": 12,
+      "specificity": 0.0,
+      "total": 12
+    },
+    "exact_repeat": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 12,
+      "TP": 0,
+      "ambiguous": 0,
+      "precision": null,
+      "recall": null,
+      "scored": 12,
+      "specificity": 1.0,
+      "total": 12
+    },
+    "sensor_noise": {
+      "FN": 0,
+      "FP": 0,
+      "TN": 12,
+      "TP": 0,
+      "ambiguous": 0,
+      "precision": null,
+      "recall": null,
+      "scored": 12,
+      "specificity": 1.0,
+      "total": 12
+    }
+  },
+  "detector_sha256": "6637b12a30f3088b588c608d33816a489d18ee3737b6297d6516134b116096dc",
+  "frozen_detector_commit": "d09d96889f30d07e0902830b90cb616a60d4149e",
+  "macro_recall_sequence_count": 12,
+  "macro_sequence_recall": 0.9444444444444445,
+  "numpy_version": "2.5.2",
+  "opencv_version": "5.0.0",
+  "protocol_id": "davis-change-proxy-v1",
+  "protocol_sha256": "c754e01eea0692a799ddbfdc7d432d62b556b0888b2e10ffa416ea9b667d1404",
+  "real_pairs": {
+    "FN": 2,
+    "FP": 0,
+    "TN": 0,
+    "TP": 34,
+    "ambiguous": 0,
+    "precision": 1.0,
+    "recall": 0.9444444444444444,
+    "scored": 36,
+    "specificity": null,
+    "total": 36
+  },
+  "real_results": [
+    {
+      "annotation_preview": "annotations/bike-packing-00000-00005.png",
+      "annotation_preview_sha256": "b1fef3cb85b0263814eaf9db1ee2291b5bdf83eeef98277f17fd827d96f5ce46",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.024172,
+          "changed_regions": [
+            [
+              276,
+              86,
+              348,
+              394
+            ],
+            [
+              259,
+              200,
+              50,
+              280
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "20879fef6c2430d13851707baa4371bd8b854e0d65225571ceb1f675d19c135a",
+          "previous_sha256": "13731d5dcf2f1e6e70278a06fba7ecc9f7110ed7834686efc69a8b69d26be1b7",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "bike-packing-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.03596153846153846,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bike-packing"
+    },
+    {
+      "annotation_preview": "annotations/bike-packing-00010-00015.png",
+      "annotation_preview_sha256": "ec1bfef242d0e9865a8342bac78e44e10a572544ad79de136c306cbe6556bf25",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.046191,
+          "changed_regions": [
+            [
+              241,
+              0,
+              397,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "035f59781c9d6799302e6d7256e5c575e351009e3c452c35bfdcb6511a0e6bfa",
+          "previous_sha256": "d4b4645128431caaffe9d4a8462f23b2670c6437aa18ed28d091a1a52995d3c1",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "bike-packing-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.09654990842490843,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bike-packing"
+    },
+    {
+      "annotation_preview": "annotations/bike-packing-00020-00025.png",
+      "annotation_preview_sha256": "2793620ea00b30ac42bf72b12c14e0fad97628377c38a9901977051f1894322f",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.052557,
+          "changed_regions": [
+            [
+              223,
+              38,
+              657,
+              442
+            ],
+            [
+              304,
+              453,
+              104,
+              27
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "1dd93aa3d3d6e16cbaca5b133b6fb8a17e1ebf2563cf27cfb8e4033390b083ad",
+          "previous_sha256": "9a2ba088b0f1c183eb1daf9c18282455199269d653606b258b6c3b3451731a59",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "bike-packing-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.09094322344322345,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bike-packing"
+    },
+    {
+      "annotation_preview": "annotations/blackswan-00000-00005.png",
+      "annotation_preview_sha256": "3325a289e1b9867d5a1054b0ab1e7761db7741367976a468cc1eb9c23eceab93",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.078438,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              704,
+              139,
+              150,
+              61
+            ],
+            [
+              243,
+              168,
+              97,
+              35
+            ],
+            [
+              544,
+              268,
+              232,
+              176
+            ],
+            [
+              719,
+              384,
+              65,
+              33
+            ],
+            [
+              786,
+              410,
+              68,
+              70
+            ],
+            [
+              674,
+              427,
+              62,
+              53
+            ],
+            [
+              726,
+              435,
+              48,
+              45
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "b88f2ec6e695d40b193d0ef038457df20f47dc14dc74f30403c90cf7883fd1e0",
+          "previous_sha256": "6544f8b98ca68fdd88f6ce5c706a8a6ad71e07c574eb87f0eacabd04549ff6f8",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "blackswan-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.03913690476190476,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "blackswan"
+    },
+    {
+      "annotation_preview": "annotations/blackswan-00010-00015.png",
+      "annotation_preview_sha256": "ce8adc29bfa76d471695b78e70325bb4815d83470d4e8382afe284d1172a6d4d",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.092804,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              62,
+              152,
+              110,
+              46
+            ],
+            [
+              564,
+              277,
+              90,
+              65
+            ],
+            [
+              651,
+              315,
+              80,
+              51
+            ],
+            [
+              571,
+              323,
+              82,
+              97
+            ],
+            [
+              528,
+              361,
+              48,
+              78
+            ],
+            [
+              662,
+              375,
+              62,
+              66
+            ],
+            [
+              392,
+              445,
+              62,
+              35
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "fe21230a575922e86609a95ca2d7c1b750f6684ccdad90e76b8b0dc74e361b07",
+          "previous_sha256": "3dd8fce0d295abd39f889cc36a009515be7a6d323c5b779a672c5be82a03646a",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "blackswan-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.03952966432474629,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "blackswan"
+    },
+    {
+      "annotation_preview": "annotations/blackswan-00020-00025.png",
+      "annotation_preview_sha256": "8cf07dcf8dec8c4eebcfdfce0aaa776f7a47d61ba3915b8ed7007e0a4dff9833",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.081924,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              417
+            ],
+            [
+              795,
+              167,
+              59,
+              31
+            ],
+            [
+              588,
+              216,
+              76,
+              63
+            ],
+            [
+              0,
+              334,
+              283,
+              107
+            ],
+            [
+              546,
+              351,
+              86,
+              57
+            ],
+            [
+              718,
+              367,
+              38,
+              56
+            ],
+            [
+              0,
+              411,
+              84,
+              50
+            ],
+            [
+              548,
+              422,
+              84,
+              58
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "41f538b0c0c3631ab71f392097329116a633054f4f5accd8cdda4506c7aa8ae8",
+          "previous_sha256": "925f484d908b4c069b75151eead42e7988356a4abf7affcadf950bfc7f532319",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "blackswan-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.025995316159250586,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "blackswan"
+    },
+    {
+      "annotation_preview": "annotations/bmx-trees-00000-00005.png",
+      "annotation_preview_sha256": "d007b6fb79090f605ea2ec83ead6efbbcb0bee4457b604651a85812b3cf44906",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.122571,
+          "changed_regions": [
+            [
+              0,
+              0,
+              278,
+              49
+            ],
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              0,
+              263,
+              79,
+              56
+            ],
+            [
+              235,
+              376,
+              165,
+              104
+            ],
+            [
+              0,
+              444,
+              51,
+              36
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "5c729c95e5aec3de03b075d5d6b3e681e1b730061d5d252dff7e557cae9848f6",
+          "previous_sha256": "85c9cfbb96c6d29ba931dc5f856aa802248e6908abb25072f8a3791a2a3d419f",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "bmx-trees-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.02735411787665886,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bmx-trees"
+    },
+    {
+      "annotation_preview": "annotations/bmx-trees-00010-00015.png",
+      "annotation_preview_sha256": "ca36d6c0ef3b04ceb44e19b6df7c3fe0b1ba9ab9637eeaac01c74a019d356f99",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.12493,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              239,
+              0,
+              117,
+              37
+            ],
+            [
+              0,
+              226,
+              210,
+              109
+            ],
+            [
+              127,
+              255,
+              95,
+              38
+            ],
+            [
+              0,
+              295,
+              68,
+              40
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "a65511d84b8145211ab4671f24c36d234d6c5d2d28719bb737ad81e197b3cd01",
+          "previous_sha256": "029a8678aa8be969bbea1bb77ea1d1158553045664f97afc74ff8d3bee383f33",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "bmx-trees-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.02817866900858704,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bmx-trees"
+    },
+    {
+      "annotation_preview": "annotations/bmx-trees-00020-00025.png",
+      "annotation_preview_sha256": "ac8349ef556d37754d8f29214f7a0c12fc79afe4e33e2951975d6af1175164a0",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.14026,
+          "changed_regions": [
+            [
+              0,
+              0,
+              39,
+              77
+            ],
+            [
+              0,
+              0,
+              206,
+              326
+            ],
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              632,
+              0,
+              222,
+              192
+            ],
+            [
+              120,
+              64,
+              83,
+              127
+            ],
+            [
+              716,
+              456,
+              138,
+              24
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "5755d34fc66970709c98111a0e32c8d1590f7c736dbd9d313b3fdc95c8590ced",
+          "previous_sha256": "660904c9861ab739f43d98529839e302ec85507f51d0861e7c087a955cb40cc9",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "bmx-trees-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.029088602654176423,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "bmx-trees"
+    },
+    {
+      "annotation_preview": "annotations/breakdance-00000-00005.png",
+      "annotation_preview_sha256": "3a57572ab8529fea90994e9ba53ddf3e9c45bfb3034f8a3237660a3b5b35b523",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.05001,
+          "changed_regions": [
+            [
+              97,
+              0,
+              324,
+              459
+            ],
+            [
+              0,
+              112,
+              82,
+              177
+            ],
+            [
+              784,
+              146,
+              66,
+              59
+            ],
+            [
+              433,
+              196,
+              55,
+              90
+            ],
+            [
+              0,
+              285,
+              119,
+              163
+            ],
+            [
+              445,
+              306,
+              53,
+              111
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "8dceede9fbf006de0a1cda112185925eb0c8a2f67c990e759abda0630030d5c3",
+          "previous_sha256": "f3b630cadeb8e8ab011a00126d7cbcdaafe30bfd5371d711752fcef534c2d99e",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "breakdance-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.0633269906323185,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "breakdance"
+    },
+    {
+      "annotation_preview": "annotations/breakdance-00010-00015.png",
+      "annotation_preview_sha256": "20bf6e40c30d11d8d9417e8c6468d00be164ac3bba6403348ac96a8648f774b4",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.06353,
+          "changed_regions": [
+            [
+              0,
+              91,
+              573,
+              389
+            ],
+            [
+              0,
+              117,
+              120,
+              117
+            ],
+            [
+              719,
+              125,
+              58,
+              90
+            ],
+            [
+              661,
+              182,
+              59,
+              101
+            ],
+            [
+              388,
+              192,
+              100,
+              68
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "e4bdc733c10e39f60589c5484f96c7e1d17b54438b5797fec495f4215dc94bbb",
+          "previous_sha256": "67eae5e23b921da85aca74ff34827731c02a343082661da896fbb6d03f76ed2e",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "breakdance-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.09163983216237315,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "breakdance"
+    },
+    {
+      "annotation_preview": "annotations/breakdance-00020-00025.png",
+      "annotation_preview_sha256": "d0c854fb0fda55c0e71299d92e595ab184496f094255f5188ea9fc686a49d1d0",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.055779,
+          "changed_regions": [
+            [
+              0,
+              32,
+              601,
+              423
+            ],
+            [
+              719,
+              103,
+              67,
+              112
+            ],
+            [
+              0,
+              122,
+              93,
+              138
+            ],
+            [
+              648,
+              169,
+              78,
+              76
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "8e8afff708355d656345aadcac9d1375a19dd5772b61f855beb21d014f0c8fe1",
+          "previous_sha256": "54b8022e9a377089087134f7297a5da685f38ae081a26e9dcd9f8b544b6a7c60",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "breakdance-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.09605044886807182,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "breakdance"
+    },
+    {
+      "annotation_preview": "annotations/camel-00000-00005.png",
+      "annotation_preview_sha256": "5e93af6df39fb9f293153f2c49fcabc6b998c03c0bf422e2e79c25e7e3dce3a6",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.105559,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              0,
+              372,
+              76,
+              46
+            ],
+            [
+              771,
+              394,
+              83,
+              41
+            ],
+            [
+              767,
+              446,
+              87,
+              24
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "9a9d54427a94e4f0b4fb8f414906027bc53eb1914f107617ad7ae58e3e9545ce",
+          "previous_sha256": "10d0a7dc4e35df3c069c49b74e5a9c6cc8862f67ff0a230aeec683d3084dda95",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "camel-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.07268735362997658,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "camel"
+    },
+    {
+      "annotation_preview": "annotations/camel-00010-00015.png",
+      "annotation_preview_sha256": "f6605b3051beb7fe0e8ce4aae5900d4751ea96b6049139ee435c025ceb5d770a",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.08573,
+          "changed_regions": [
+            [
+              0,
+              0,
+              36,
+              72
+            ],
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              710,
+              412,
+              144,
+              33
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "5d4df96ff0eac412b9ce264e0e0346fe80b15b8af160d6b20f8dded36dec4509",
+          "previous_sha256": "dbaba96f67c70b93e4d2a0228f938e63a2d059f09abad7fd9ca14ca95ac5448a",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "camel-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.04446965261514442,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "camel"
+    },
+    {
+      "annotation_preview": "annotations/camel-00020-00025.png",
+      "annotation_preview_sha256": "9d548b42b0e8cd0d0d2bfa542155fce27a4a7e94063414cbe1b805ea26d8d285",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.113612,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              669,
+              400,
+              133,
+              27
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "3ce8d3abe271b61deecb79f80635c9e86f2948432071220bf708a2058238608b",
+          "previous_sha256": "e72d368d9bb8b1ff5fcae9f04dafc0ef172a0e198c41cb33e65cef4b3e4749df",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "camel-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.0638002537080406,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "camel"
+    },
+    {
+      "annotation_preview": "annotations/car-roundabout-00000-00005.png",
+      "annotation_preview_sha256": "e29040bb7b9dd1583814f128af75987cbca94c56719d81da60dd33284ed2789e",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.13338,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              358
+            ],
+            [
+              490,
+              282,
+              113,
+              70
+            ],
+            [
+              0,
+              359,
+              376,
+              42
+            ],
+            [
+              587,
+              408,
+              267,
+              15
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "4a13b3093eb0f5cb7240c7b8b4818435db9c022a8e7133ab8697470d979cb742",
+          "previous_sha256": "62e3dbf66819620208a9207a85cb87f519bd03149d0360e952796ac9ea0ac9e8",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "car-roundabout-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.0242705893832943,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-roundabout"
+    },
+    {
+      "annotation_preview": "annotations/car-roundabout-00010-00015.png",
+      "annotation_preview_sha256": "6bf10c21b6050b9254f4c4f70dff4f7dded6811c7b3a0d057008ba2df94a1a9a",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.122312,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              359
+            ],
+            [
+              0,
+              389,
+              683,
+              28
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "5dacbffc6e01ed16232b40671762a941bf5c2f8b842559cbb9c235df4b7b90d6",
+          "previous_sha256": "2b8f460883b34e16b3dcb253d7e620627b20057f992bc4f1210bf2f3bec31ac4",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "car-roundabout-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.007779566744730679,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-roundabout"
+    },
+    {
+      "annotation_preview": "annotations/car-roundabout-00020-00025.png",
+      "annotation_preview_sha256": "d077deae972e7d7be60464ead86c06e2cf3092699b2e1d0f8121faebb6e42900",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.129362,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              352
+            ],
+            [
+              314,
+              273,
+              326,
+              88
+            ],
+            [
+              148,
+              288,
+              369,
+              78
+            ],
+            [
+              0,
+              409,
+              584,
+              14
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "d66d00b8364de66ae604aac2faaee47ae64a73c3df7ddda6510993f3ec91655d",
+          "previous_sha256": "d9edda987f014b271498c872c834e60a4b6f5af7f89455f5e42fa6d897abdeb8",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "car-roundabout-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.006794008587041374,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-roundabout"
+    },
+    {
+      "annotation_preview": "annotations/car-shadow-00000-00005.png",
+      "annotation_preview_sha256": "ce37eea1146727d134678952ddacde32f9853fe7e50265bc41e28bc75041d159",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.088511,
+          "changed_regions": [
+            [
+              0,
+              0,
+              135,
+              36
+            ],
+            [
+              0,
+              0,
+              854,
+              333
+            ],
+            [
+              164,
+              0,
+              115,
+              53
+            ],
+            [
+              280,
+              0,
+              59,
+              61
+            ],
+            [
+              114,
+              69,
+              31,
+              70
+            ],
+            [
+              143,
+              69,
+              141,
+              65
+            ],
+            [
+              0,
+              357,
+              335,
+              19
+            ],
+            [
+              518,
+              362,
+              261,
+              15
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "5210b807cb709228f34ca6b03e58eea45912c48f92ce87adb525de4941b6f5c4",
+          "previous_sha256": "d03fa65f5b71caffc525d35357c537b4e18ec785204691eb61e57de3cdd43126",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "car-shadow-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.04689451600312256,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-shadow"
+    },
+    {
+      "annotation_preview": "annotations/car-shadow-00010-00015.png",
+      "annotation_preview_sha256": "c5a3644f5a408ee32885a1ad4156f3ea563c4bef081db2aa7208561e07a2b9de",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.086843,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              375
+            ],
+            [
+              119,
+              0,
+              196,
+              52
+            ],
+            [
+              348,
+              0,
+              49,
+              62
+            ],
+            [
+              411,
+              4,
+              75,
+              72
+            ],
+            [
+              272,
+              77,
+              63,
+              63
+            ],
+            [
+              716,
+              317,
+              138,
+              45
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "a95952946cbfce8495b4c53859b7bc5995753f6b75549a046d136696706f80d2",
+          "previous_sha256": "5b3c592c0908ae6c78b4e08223830cbb8d572490604e718191dd0c7df583bda2",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "car-shadow-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.015542056986729117,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-shadow"
+    },
+    {
+      "annotation_preview": "annotations/car-shadow-00020-00025.png",
+      "annotation_preview_sha256": "2eca51ae4a7afaff02d1b3519b00a05b6eab10fdd273dc1e4e106f4d021f0008",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.09699,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              378
+            ],
+            [
+              171,
+              0,
+              86,
+              45
+            ],
+            [
+              262,
+              0,
+              181,
+              59
+            ],
+            [
+              475,
+              0,
+              49,
+              68
+            ],
+            [
+              539,
+              13,
+              37,
+              62
+            ],
+            [
+              576,
+              19,
+              41,
+              64
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "456458914f9cb8b1a7658ba79b5aff3e829386b3cbca4f04a7300a6fae3647ce",
+          "previous_sha256": "879e91783bb123b9b45d5b087032312ecd2e76413ab10a92041903d72de9d062",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "car-shadow-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.011648614363778299,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "car-shadow"
+    },
+    {
+      "annotation_preview": "annotations/cows-00000-00005.png",
+      "annotation_preview_sha256": "1bc0ee75d1264f60ca53367913c04f627bd27aa85be142da563a3dc653ec52ab",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.071568,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              431,
+              0,
+              89,
+              58
+            ],
+            [
+              626,
+              325,
+              228,
+              155
+            ],
+            [
+              596,
+              438,
+              47,
+              42
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "894ecfad43293c30f033f4653c9fd228be8934c8dbcd531571747fe94cec2182",
+          "previous_sha256": "720a86212910a3359e277f56fe7dfa4ce7e772dfbbb0ac3b0237f33c210eb7b9",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "cows-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.03159396955503513,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "cows"
+    },
+    {
+      "annotation_preview": "annotations/cows-00010-00015.png",
+      "annotation_preview_sha256": "eec1922eff3eb89246d5bab9d37896bc1bb9c5cadeae01dad409b2250b7d08c7",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.040738,
+          "changed_regions": [
+            [
+              0,
+              25,
+              854,
+              455
+            ],
+            [
+              784,
+              331,
+              70,
+              43
+            ],
+            [
+              675,
+              394,
+              148,
+              86
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "656a4ff568c86b225b41f0ae19d63fa3f7ad8269fe4b6fd7bfa75ea6d6a35a5d",
+          "previous_sha256": "576f0b1c8b9358f8b0920c7e483c4223213c4ac33f9ed23e56c81b73428ea826",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "cows-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.017069184231069477,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "cows"
+    },
+    {
+      "annotation_preview": "annotations/cows-00020-00025.png",
+      "annotation_preview_sha256": "118cfb6e4a28d6d05d45e94d31422a1bc0c362be95488d71d255f08f677b698c",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.084235,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "5f23ccbd77ce8803d67829961070b86bb1a8a90f3bc9580bf37ee2e5bff938e8",
+          "previous_sha256": "e74bb2c752662f96f6210d3cd47dddc21d2085af818a6e8c615f4130f83dd7fe",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "cows-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.04151053864168618,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "cows"
+    },
+    {
+      "annotation_preview": "annotations/dance-twirl-00000-00005.png",
+      "annotation_preview_sha256": "c90c70485be1e019d600a20cb4757744f9a4dbc74e13db9598646944ebc7ab57",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.10948,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              437
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "bc7622af6e484890835b45136cafaaea2fea73fd1ada7d6c879629e6cf2e2f53",
+          "previous_sha256": "36685274794859438def6a0cddee0ff47dc8fc69c2b3310a60e1b42661abf0bb",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "dance-twirl-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.04064451600312256,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dance-twirl"
+    },
+    {
+      "annotation_preview": "annotations/dance-twirl-00010-00015.png",
+      "annotation_preview_sha256": "ad7c9aa21a8acb219c36de84b234c518e8861675bdc80ccbc049ea1a6e3e0837",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.130528,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              473
+            ],
+            [
+              381,
+              386,
+              53,
+              43
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "a4fc3631083271651aab2816b1ac5cad84d90fbc97f09cde5ce69ba582470500",
+          "previous_sha256": "a99f62fed3c836261233a5e43b43fedbb211100cd16de6bc3c6ba0f4c88d593b",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "dance-twirl-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.05564744340359094,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dance-twirl"
+    },
+    {
+      "annotation_preview": "annotations/dance-twirl-00020-00025.png",
+      "annotation_preview_sha256": "bd2596447a984db3f2c7337fa3b272eac0f8f0fae28b48f649844174fbd3e710",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.121997,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              431
+            ],
+            [
+              363,
+              404,
+              68,
+              55
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "6b096645b528fab3555f45e39f96af245b017e2c362d1dab59adbe0086c549e8",
+          "previous_sha256": "c97544aee98a8c86bd5b63f6662b17166e8c1ab920f492c3c6575eb29639fcbf",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "dance-twirl-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.04847043325526932,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dance-twirl"
+    },
+    {
+      "annotation_preview": "annotations/dog-00000-00005.png",
+      "annotation_preview_sha256": "8c099bee89c33a7bb5e5a64e8cb820162ab26205a8119ad38a2a616964c7097e",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.087323,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              221,
+              0,
+              133,
+              60
+            ],
+            [
+              356,
+              0,
+              133,
+              72
+            ],
+            [
+              0,
+              51,
+              149,
+              74
+            ],
+            [
+              762,
+              68,
+              92,
+              86
+            ],
+            [
+              124,
+              233,
+              82,
+              57
+            ],
+            [
+              569,
+              433,
+              97,
+              47
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "6645c6ebeac82ba30a08452c7bfabfe9c819f327ff1469b6837d6b806a0aabf7",
+          "previous_sha256": "883d5e7c1f808e8604e787cc7177fbae91c6ffaff19a8a1256f21a2e1595fe62",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "dog-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.07579527712724433,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dog"
+    },
+    {
+      "annotation_preview": "annotations/dog-00010-00015.png",
+      "annotation_preview_sha256": "8fd020324280c61eced30bc1fbe46744ec4bbae9af021524b401953c3194462f",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.084508,
+          "changed_regions": [
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              689,
+              62,
+              134,
+              105
+            ],
+            [
+              0,
+              77,
+              129,
+              68
+            ],
+            [
+              0,
+              241,
+              190,
+              227
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "6850325721eaa160ff52bd5ee9af992492eaff8032145b9eb94ab26671ecbeb3",
+          "previous_sha256": "6cf7b71dc6b732d57e376284f90f5aed9141862e671497a416758d4755ac0fbe",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "dog-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.06456869633099141,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dog"
+    },
+    {
+      "annotation_preview": "annotations/dog-00020-00025.png",
+      "annotation_preview_sha256": "5225d1f1cc1de53ec8f403856d086bca8e4f4ea84e783b8186e2c875d466dadb",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.098204,
+          "changed_regions": [
+            [
+              0,
+              0,
+              299,
+              30
+            ],
+            [
+              0,
+              0,
+              854,
+              480
+            ],
+            [
+              756,
+              42,
+              95,
+              107
+            ],
+            [
+              0,
+              250,
+              305,
+              228
+            ],
+            [
+              131,
+              262,
+              63,
+              59
+            ],
+            [
+              306,
+              370,
+              80,
+              76
+            ],
+            [
+              387,
+              375,
+              66,
+              47
+            ],
+            [
+              804,
+              416,
+              50,
+              64
+            ],
+            [
+              162,
+              425,
+              71,
+              55
+            ],
+            [
+              41,
+              429,
+              55,
+              51
+            ],
+            [
+              316,
+              444,
+              110,
+              36
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "2a84b45a7764cc6fa2394792df0473b8622f5b60a0f18ba642ca8fda21425d4a",
+          "previous_sha256": "fd0677f57a9da6a1e84872bafa2a5006466728c7d158bf160d7870927f71a357",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "dog-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.0722872755659641,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dog"
+    },
+    {
+      "annotation_preview": "annotations/dogs-jump-00000-00005.png",
+      "annotation_preview_sha256": "34ecae251c85d2e128a5836461ab06f6d25ddf994275d300108ceb5cbae4817d",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.029792,
+          "changed_regions": [
+            [
+              0,
+              126,
+              854,
+              331
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "f05395bc46f3627fe18449d656bf37283f9419e7c93c06db6ceba1f92e6c706e",
+          "previous_sha256": "2bd517ae8a17ddfe98b28d471978065cb1dec3f551d924fd6caebad3254f8489",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "dogs-jump-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.025365925058548008,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dogs-jump"
+    },
+    {
+      "annotation_preview": "annotations/dogs-jump-00010-00015.png",
+      "annotation_preview_sha256": "0895f47c6dc3e1cc121ca27d0f628e573f28e8f1986b9c6b1fc332f782b04fc0",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.053739,
+          "changed_regions": [
+            [
+              0,
+              139,
+              854,
+              248
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "a31d3d316c04d4f8baea820e6a45cfc273331465bc31fe847efebb3e5aff0430",
+          "previous_sha256": "687c86236f1562ee5339b5f78618c53caf38948f29af38153a8455e1170cdb12",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "dogs-jump-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.09033957845433255,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dogs-jump"
+    },
+    {
+      "annotation_preview": "annotations/dogs-jump-00020-00025.png",
+      "annotation_preview_sha256": "a8c9a73998172f7721bd64b8326e3d6f7cacdf87c11f94f3973d343fbd8de7b0",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.031946,
+          "changed_regions": [
+            [
+              0,
+              150,
+              541,
+              237
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "0c4b3db68327b61023962afc2fcb0535ccdf1b175ea2191d3bb48b0342e1729b",
+          "previous_sha256": "3b00775954315169592708d14e1a423672d94495b1046d31ed23c638503f84dd",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "dogs-jump-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.05555230288836846,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "dogs-jump"
+    },
+    {
+      "annotation_preview": "annotations/drift-chicane-00000-00005.png",
+      "annotation_preview_sha256": "dc61215c3fdf96fabed908e2ca5be653c97bae1b29347bd4815c6640b2acdaa3",
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": true,
+      "frames": [
+        0,
+        5
+      ],
+      "id": "drift-chicane-00000-00005",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.012326795472287275,
+      "outcome": "FN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "drift-chicane"
+    },
+    {
+      "annotation_preview": "annotations/drift-chicane-00010-00015.png",
+      "annotation_preview_sha256": "0d0a9ec4688211fe5f470a6eb369ae0cf3a8ba6eb8bac76e8a1a12a1aee8e30b",
+      "detected_change": true,
+      "evidence_cards": [
+        {
+          "change_score": 0.024109,
+          "changed_regions": [
+            [
+              570,
+              25,
+              172,
+              168
+            ],
+            [
+              277,
+              199,
+              186,
+              63
+            ]
+          ],
+          "frame_index": 1,
+          "frame_sha256": "8493f7109c77a7474774b62c8c2a6773b19d7c57e4e31eb0bdd7736e2a08b1d0",
+          "previous_sha256": "77cfe2b78d10cffd4664bee96d5cbfa3d3ac1a628fed60825b092b93cc8fd84c",
+          "timestamp_ms": 1000
+        }
+      ],
+      "expected_change": true,
+      "frames": [
+        10,
+        15
+      ],
+      "id": "drift-chicane-00010-00015",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.01291471506635441,
+      "outcome": "TP",
+      "review_plan": {
+        "action": "seal_evidence_for_agent_summary",
+        "reason": "OpenCV found localized changes that are reviewable without an immediate escalation.",
+        "triggering_frames": [
+          1
+        ]
+      },
+      "sequence": "drift-chicane"
+    },
+    {
+      "annotation_preview": "annotations/drift-chicane-00020-00025.png",
+      "annotation_preview_sha256": "8cedf7d6c9e3a581629691a60bdcf0ed1dd9e0ef3125c9deddd7e541cbdd870e",
+      "detected_change": false,
+      "evidence_cards": [],
+      "expected_change": true,
+      "frames": [
+        20,
+        25
+      ],
+      "id": "drift-chicane-00020-00025",
+      "kind": "real_pair",
+      "mask_xor_fraction": 0.0055620608899297425,
+      "outcome": "FN",
+      "review_plan": {
+        "action": "complete_no_material_change",
+        "reason": "OpenCV found no frame transition above the configured threshold.",
+        "triggering_frames": []
+      },
+      "sequence": "drift-chicane"
+    }
+  ],
+  "receipt_sha256": "64ee986bf1bcd1f5949b7064d6d5754c05b1aa73592f10e5a7b80aac3fef3c0e",
+  "reference": "DAVIS human-annotated foreground occupancy XOR; a proxy, not semantic incident labels",
+  "schema_version": 1,
+  "source_manifest": {
+    "archive_bytes": 832766765,
+    "archive_etag": "\"31a3032d-54c6d0af8b4dc\"",
+    "archive_url": "https://data.vision.ee.ethz.ch/csergi/share/davis/DAVIS-2017-trainval-480p.zip",
+    "files": [
+      {
+        "bytes": 179695,
+        "path": "DAVIS/JPEGImages/480p/bike-packing/00000.jpg",
+        "sha256": "7c0227cdfbe16981d0f04f83a6539034711575433141555ce849a00f92f7346f"
+      },
+      {
+        "bytes": 6902,
+        "path": "DAVIS/Annotations/480p/bike-packing/00000.png",
+        "sha256": "3923e5944b9d08848dc4fb235d0bc7cb25cdbd3b1bbb7ab99389427436c44402"
+      },
+      {
+        "bytes": 175158,
+        "path": "DAVIS/JPEGImages/480p/bike-packing/00005.jpg",
+        "sha256": "a05693ec751f4208f6235865fbb9fdae73cb9034fe9d65ed5428e4a33016cef8"
+      },
+      {
+        "bytes": 6992,
+        "path": "DAVIS/Annotations/480p/bike-packing/00005.png",
+        "sha256": "cb5a8f4b7bde76777921d5f0daf81430e5f353594055246af21b3e7731d39e8f"
+      },
+      {
+        "bytes": 176788,
+        "path": "DAVIS/JPEGImages/480p/bike-packing/00010.jpg",
+        "sha256": "2f86079b037bb742ec86974c268b7417aedcf984469767a299b77511630730a5"
+      },
+      {
+        "bytes": 7880,
+        "path": "DAVIS/Annotations/480p/bike-packing/00010.png",
+        "sha256": "961dee32ded717b35223d692e38b7b39407b14b5f6f2f4842ab4b80c9201427e"
+      },
+      {
+        "bytes": 172335,
+        "path": "DAVIS/JPEGImages/480p/bike-packing/00015.jpg",
+        "sha256": "cc27d770f729b2dd2ec05ccf1cfdcd3222b628be4756691061277ba7cc20a8a7"
+      },
+      {
+        "bytes": 5705,
+        "path": "DAVIS/Annotations/480p/bike-packing/00015.png",
+        "sha256": "5533e141cf07257559a71ed7037a31c79023b25d792280e4a25ee8531ff2c165"
+      },
+      {
+        "bytes": 178954,
+        "path": "DAVIS/JPEGImages/480p/bike-packing/00020.jpg",
+        "sha256": "79422bd2bf1aabb27b1e0518321ae2364dd50f415c94934455e7d83f6f28d359"
+      },
+      {
+        "bytes": 9964,
+        "path": "DAVIS/Annotations/480p/bike-packing/00020.png",
+        "sha256": "1c849b6c4289325a5b12d83fc8f5e39e61d045edeb5026d93f6e2dad1044bef5"
+      },
+      {
+        "bytes": 184967,
+        "path": "DAVIS/JPEGImages/480p/bike-packing/00025.jpg",
+        "sha256": "7e4bfd97799df26605eb0390a30f1483a103f92184271c655bc5263f126e79e3"
+      },
+      {
+        "bytes": 11000,
+        "path": "DAVIS/Annotations/480p/bike-packing/00025.png",
+        "sha256": "548e1cecf52c5f300568c86ac1ac225905eafce020e68de22af202955015790a"
+      },
+      {
+        "bytes": 129502,
+        "path": "DAVIS/JPEGImages/480p/blackswan/00000.jpg",
+        "sha256": "f134391f3c757dd305e79f1fb3a3e6b0ec441013394f2e620d3cfe6b887a02c4"
+      },
+      {
+        "bytes": 3011,
+        "path": "DAVIS/Annotations/480p/blackswan/00000.png",
+        "sha256": "2c6e31865643a063dfcea4d3b619201528f4fd11544149937bea63b6c113b039"
+      },
+      {
+        "bytes": 129303,
+        "path": "DAVIS/JPEGImages/480p/blackswan/00005.jpg",
+        "sha256": "1c444f058072ef8a698e46a7bda7968d48226325d5ad0157ca74551edb33fca0"
+      },
+      {
+        "bytes": 3012,
+        "path": "DAVIS/Annotations/480p/blackswan/00005.png",
+        "sha256": "9b56731507f57e097bc0f2ac71d620b2b84571715db601ca235105de3b09c516"
+      },
+      {
+        "bytes": 128755,
+        "path": "DAVIS/JPEGImages/480p/blackswan/00010.jpg",
+        "sha256": "f9191bf19b1c803caf755387852cc3883f32495dab8f232a871019de2d9dfaa3"
+      },
+      {
+        "bytes": 3028,
+        "path": "DAVIS/Annotations/480p/blackswan/00010.png",
+        "sha256": "3c5d9fdd7d106f8e9429e6f44cafdef55843b9b3c3a459031956f560a1a02afd"
+      },
+      {
+        "bytes": 124116,
+        "path": "DAVIS/JPEGImages/480p/blackswan/00015.jpg",
+        "sha256": "f47904d5d43c1ccaa40e475f957a21bb369e0c53f265d8b2c81040b9ebcfba01"
+      },
+      {
+        "bytes": 3027,
+        "path": "DAVIS/Annotations/480p/blackswan/00015.png",
+        "sha256": "f3ef8bdab208cb3386d9d95dcd6e38ac4171c0749f7e71d80a24ca5b4c62bbc0"
+      },
+      {
+        "bytes": 126680,
+        "path": "DAVIS/JPEGImages/480p/blackswan/00020.jpg",
+        "sha256": "58227d78be7958d8f41bbddf83cbe05efcc6287a7a07201916544c987bd49176"
+      },
+      {
+        "bytes": 3021,
+        "path": "DAVIS/Annotations/480p/blackswan/00020.png",
+        "sha256": "f45944284d981daf571d58d5e8690347fadcb70fabaa64f1fdd52f4a922bf164"
+      },
+      {
+        "bytes": 122714,
+        "path": "DAVIS/JPEGImages/480p/blackswan/00025.jpg",
+        "sha256": "c8b2cc99a0459a681f625542d2a2cd0f35bc00f886dcd167cb28445f13c13907"
+      },
+      {
+        "bytes": 3023,
+        "path": "DAVIS/Annotations/480p/blackswan/00025.png",
+        "sha256": "a3b2999e24b38bf32da8f2b1e5263f616f74fb6e8f8f8b36909190f9bd80b08a"
+      },
+      {
+        "bytes": 95499,
+        "path": "DAVIS/JPEGImages/480p/bmx-trees/00000.jpg",
+        "sha256": "64d01a321146130b47a751da835ff244b8065148e3a75763d4cc6e2287f2f47f"
+      },
+      {
+        "bytes": 3513,
+        "path": "DAVIS/Annotations/480p/bmx-trees/00000.png",
+        "sha256": "d850edabaad81cca1054bdd6f7da336e5c8e290b1af94c5f09095796aa231bf8"
+      },
+      {
+        "bytes": 99537,
+        "path": "DAVIS/JPEGImages/480p/bmx-trees/00005.jpg",
+        "sha256": "98330afa015d2d89735fc39c954f40f2de35097919011455cb30eb45697afdb4"
+      },
+      {
+        "bytes": 3468,
+        "path": "DAVIS/Annotations/480p/bmx-trees/00005.png",
+        "sha256": "12c0fab04fe47361499176f6251029f96d9682bb5d374143fc546878d7594211"
+      },
+      {
+        "bytes": 94459,
+        "path": "DAVIS/JPEGImages/480p/bmx-trees/00010.jpg",
+        "sha256": "8d657d97eb763361cbf9972ccbe9d18714083aefdb79723f77106b398a23af58"
+      },
+      {
+        "bytes": 3584,
+        "path": "DAVIS/Annotations/480p/bmx-trees/00010.png",
+        "sha256": "29629d2d456e0db763af99e17502082ad9959d90db8ce7eb0d1c1184732c57e2"
+      },
+      {
+        "bytes": 92350,
+        "path": "DAVIS/JPEGImages/480p/bmx-trees/00015.jpg",
+        "sha256": "c88775721733b4e87c781617bb74d1434343dc46d554708150080f8342fd2ad5"
+      },
+      {
+        "bytes": 2799,
+        "path": "DAVIS/Annotations/480p/bmx-trees/00015.png",
+        "sha256": "ad38d75e48bd9d2864285c6db3d7e67c751200da71b3ff0a528cee45e7c2afd1"
+      },
+      {
+        "bytes": 89031,
+        "path": "DAVIS/JPEGImages/480p/bmx-trees/00020.jpg",
+        "sha256": "7022d5408bef73d7f3d3b1a0e973844794f0ffafdf5c45fe71416274d2c0f5ed"
+      },
+      {
+        "bytes": 2759,
+        "path": "DAVIS/Annotations/480p/bmx-trees/00020.png",
+        "sha256": "7fe063411ed1f794a02d2bd9a28153b4b1236008cd233d1e35cec5e0110de977"
+      },
+      {
+        "bytes": 102695,
+        "path": "DAVIS/JPEGImages/480p/bmx-trees/00025.jpg",
+        "sha256": "61d42ff2262c05f5c0909920e58e2d176d5cd6faffd417db4511b07891105ba5"
+      },
+      {
+        "bytes": 2851,
+        "path": "DAVIS/Annotations/480p/bmx-trees/00025.png",
+        "sha256": "c74c5787f28dd8581757bd8e98f235286f00fbbc0204c8ee9946930502967dc8"
+      },
+      {
+        "bytes": 147410,
+        "path": "DAVIS/JPEGImages/480p/breakdance/00000.jpg",
+        "sha256": "83b6680c20142666c3a3b066d7ca2a48718a536ddaa9d296702c47915b94f6ce"
+      },
+      {
+        "bytes": 3304,
+        "path": "DAVIS/Annotations/480p/breakdance/00000.png",
+        "sha256": "14e66215be1c4c2a04c541589318213081c3cfa8f4c0557b28de09f76b7f79a4"
+      },
+      {
+        "bytes": 147384,
+        "path": "DAVIS/JPEGImages/480p/breakdance/00005.jpg",
+        "sha256": "098099ce0399aed2ecda135add4e341cc3e15343c258ce63a362b076e6ce38f3"
+      },
+      {
+        "bytes": 2899,
+        "path": "DAVIS/Annotations/480p/breakdance/00005.png",
+        "sha256": "57f37e9d9e87999c061049434289ca57bf3221375ee9b05fa8468e7fd5708a33"
+      },
+      {
+        "bytes": 144591,
+        "path": "DAVIS/JPEGImages/480p/breakdance/00010.jpg",
+        "sha256": "c6756fe549b3fd20a640462a92185271cea194450133b311f6b44499d478172f"
+      },
+      {
+        "bytes": 3171,
+        "path": "DAVIS/Annotations/480p/breakdance/00010.png",
+        "sha256": "51dc9d54fd4518015d6738ecd527ebc248a197e14bbe9e9c62746833be7cde90"
+      },
+      {
+        "bytes": 146615,
+        "path": "DAVIS/JPEGImages/480p/breakdance/00015.jpg",
+        "sha256": "5131bd6fdc6c4cb68e26f6fe33ffd4bb5ba3370e563fed873b7b49823cc79685"
+      },
+      {
+        "bytes": 3229,
+        "path": "DAVIS/Annotations/480p/breakdance/00015.png",
+        "sha256": "4c1eb31319a6057a07a1acb8c9ef7979e6052af7e8c3615865514e2897e37196"
+      },
+      {
+        "bytes": 144938,
+        "path": "DAVIS/JPEGImages/480p/breakdance/00020.jpg",
+        "sha256": "5b92dccf3d00d6a53d13cc18ea22dbe1279764fa0f7b282254a126bc1a4b725d"
+      },
+      {
+        "bytes": 3117,
+        "path": "DAVIS/Annotations/480p/breakdance/00020.png",
+        "sha256": "3d8c9d102e1e2113b3c05704561f1316c14d254de5436a365c020f24efab7541"
+      },
+      {
+        "bytes": 144012,
+        "path": "DAVIS/JPEGImages/480p/breakdance/00025.jpg",
+        "sha256": "758b78b2fa913d8d1d9c00979855ae68fa5efab526a70bf90671b0dcb80d146a"
+      },
+      {
+        "bytes": 3303,
+        "path": "DAVIS/Annotations/480p/breakdance/00025.png",
+        "sha256": "8a82f9106eadbd9a4d4a33a9839922b5f41ce0c4c76b24c93689ca8598f73a5c"
+      },
+      {
+        "bytes": 154349,
+        "path": "DAVIS/JPEGImages/480p/camel/00000.jpg",
+        "sha256": "caf4f65c214e0b937e047c44af7f39d0aef2b970a3b48134db8920ad3b3e3ec5"
+      },
+      {
+        "bytes": 4452,
+        "path": "DAVIS/Annotations/480p/camel/00000.png",
+        "sha256": "27b05b48f62db9293f991553530bb484a2f736d8b1c7dc98e8dec68115e30b52"
+      },
+      {
+        "bytes": 154591,
+        "path": "DAVIS/JPEGImages/480p/camel/00005.jpg",
+        "sha256": "c78c85eb7ae880b641e1289d09e5414d51588f847c2b46be066dfe7af1df070a"
+      },
+      {
+        "bytes": 4391,
+        "path": "DAVIS/Annotations/480p/camel/00005.png",
+        "sha256": "5dfb3fc6280d3c5c1fa608ec7b6a0acc2b7075beed9c32ed5c7c52fcf69ae3f4"
+      },
+      {
+        "bytes": 157517,
+        "path": "DAVIS/JPEGImages/480p/camel/00010.jpg",
+        "sha256": "c13ef596ebfede459221f2919d82f3271cc5bc38227cee62c86a689aa0c533db"
+      },
+      {
+        "bytes": 4101,
+        "path": "DAVIS/Annotations/480p/camel/00010.png",
+        "sha256": "4c3c7206d7311f9e01807a4eddf4ec675b208d75843af3e5f80c520afb329587"
+      },
+      {
+        "bytes": 161744,
+        "path": "DAVIS/JPEGImages/480p/camel/00015.jpg",
+        "sha256": "666ef6bc8a2dff103cff42c40c1754be88f232656ef1b7ef89ead832a956ceb5"
+      },
+      {
+        "bytes": 4358,
+        "path": "DAVIS/Annotations/480p/camel/00015.png",
+        "sha256": "33c7e8aad5849f086a6e130fc4b90d317f0fc24ca17ad72f2ecd7a8da94e01d8"
+      },
+      {
+        "bytes": 156311,
+        "path": "DAVIS/JPEGImages/480p/camel/00020.jpg",
+        "sha256": "f49092e42cece0c2b93b3b133783912f4675784d098feff7c200c038cfffe007"
+      },
+      {
+        "bytes": 4398,
+        "path": "DAVIS/Annotations/480p/camel/00020.png",
+        "sha256": "81edcb1b88272f1215f0ea00f804fc2c2a7b4b0c94a74b0177c59416add7706f"
+      },
+      {
+        "bytes": 155624,
+        "path": "DAVIS/JPEGImages/480p/camel/00025.jpg",
+        "sha256": "b61c860c827b2aac66d8244c81daad025876a49167281aa9a04e54ac5d803c3f"
+      },
+      {
+        "bytes": 4090,
+        "path": "DAVIS/Annotations/480p/camel/00025.png",
+        "sha256": "4dda4fb559615f11371e625e7f781102f9906478c880a6b4dc4509418a07f692"
+      },
+      {
+        "bytes": 122836,
+        "path": "DAVIS/JPEGImages/480p/car-roundabout/00000.jpg",
+        "sha256": "fee22e5cbf368f7b24d89217ef792cb2d3810dd8654d445009fa672074a9426f"
+      },
+      {
+        "bytes": 2569,
+        "path": "DAVIS/Annotations/480p/car-roundabout/00000.png",
+        "sha256": "e92d6f06c17c5b79305769cce8ece99ff5d94ef2199a51fb4321f4b18e610f9c"
+      },
+      {
+        "bytes": 122052,
+        "path": "DAVIS/JPEGImages/480p/car-roundabout/00005.jpg",
+        "sha256": "93b4d9642096a1ef87c95c009760e94e95e2f6b4835b11899507f10826082539"
+      },
+      {
+        "bytes": 2580,
+        "path": "DAVIS/Annotations/480p/car-roundabout/00005.png",
+        "sha256": "f72e25d03fec1a36489b85648d11ec579baf3873ebcf4544a7e9e81786ed868e"
+      },
+      {
+        "bytes": 126466,
+        "path": "DAVIS/JPEGImages/480p/car-roundabout/00010.jpg",
+        "sha256": "5fc61feaa8aaed8e5d6cf31d6efe7bacd0d87bcd05ef2b1b7f0a62a87d60ecd0"
+      },
+      {
+        "bytes": 2586,
+        "path": "DAVIS/Annotations/480p/car-roundabout/00010.png",
+        "sha256": "01fd1bfa91b2c217b7caedf678fb163de52615671f4fd4c227ea95d957fe7b23"
+      },
+      {
+        "bytes": 124952,
+        "path": "DAVIS/JPEGImages/480p/car-roundabout/00015.jpg",
+        "sha256": "eaab97b02259814a65aa0470b63caa52612333c7b7621656fb7b2f51ce330847"
+      },
+      {
+        "bytes": 2587,
+        "path": "DAVIS/Annotations/480p/car-roundabout/00015.png",
+        "sha256": "0efd13825b3c479790b00adbca47386f3cb0768bc7739f5ca7116ca13fc1bc76"
+      },
+      {
+        "bytes": 124254,
+        "path": "DAVIS/JPEGImages/480p/car-roundabout/00020.jpg",
+        "sha256": "30cc68a8c320dc02f5254e5feaf4b352e9942751c6da023652968410b627721d"
+      },
+      {
+        "bytes": 2564,
+        "path": "DAVIS/Annotations/480p/car-roundabout/00020.png",
+        "sha256": "ea9f16a0f763cc7dc5340455c05e066a6eb8a259497b0c699b92ffb76bfb14cf"
+      },
+      {
+        "bytes": 125133,
+        "path": "DAVIS/JPEGImages/480p/car-roundabout/00025.jpg",
+        "sha256": "b59c59700bf55058dcd5e703e9dc0eb61ef0ccdd02fb4b210a558ad8e625a726"
+      },
+      {
+        "bytes": 2578,
+        "path": "DAVIS/Annotations/480p/car-roundabout/00025.png",
+        "sha256": "17135288f5e8bd5c161dc5960ae1af72e765608c689e7bc5d71d0d45cea21251"
+      },
+      {
+        "bytes": 109763,
+        "path": "DAVIS/JPEGImages/480p/car-shadow/00000.jpg",
+        "sha256": "f9121f3fbdabbba4858e9bbd854faa3068d983f2dc89ff2cac45e65ccd304bdc"
+      },
+      {
+        "bytes": 2449,
+        "path": "DAVIS/Annotations/480p/car-shadow/00000.png",
+        "sha256": "5a044b70e6e73aabf0af78f69902c009940765abb392889874fbd12dc67e4429"
+      },
+      {
+        "bytes": 99509,
+        "path": "DAVIS/JPEGImages/480p/car-shadow/00005.jpg",
+        "sha256": "46d55ef59ed5f8492c46527e2bb7b961782297e0ca62805b31661845284691f8"
+      },
+      {
+        "bytes": 2389,
+        "path": "DAVIS/Annotations/480p/car-shadow/00005.png",
+        "sha256": "f82f5865398e59916544855d05a6f423b3ab8c049357c31f21bfd5ed6d11a30c"
+      },
+      {
+        "bytes": 100517,
+        "path": "DAVIS/JPEGImages/480p/car-shadow/00010.jpg",
+        "sha256": "d6aa1bfeb791b32b552a28c2f8359d91c6f1f5773fec2e62f7d6d89a093c4765"
+      },
+      {
+        "bytes": 2334,
+        "path": "DAVIS/Annotations/480p/car-shadow/00010.png",
+        "sha256": "73fbd53f46bb07f5f7bac681da75f0fa4c989933e72e2fc5d03b7c49ce5d680c"
+      },
+      {
+        "bytes": 106429,
+        "path": "DAVIS/JPEGImages/480p/car-shadow/00015.jpg",
+        "sha256": "eaa54fe3a9b0cfaf695462845936dd6d778010137ae9ee25fec85d3972a69e8f"
+      },
+      {
+        "bytes": 2251,
+        "path": "DAVIS/Annotations/480p/car-shadow/00015.png",
+        "sha256": "105698daaa987e7ead6b923c84f35442aa0206d84fb94eeb07fbc1a70e3f0469"
+      },
+      {
+        "bytes": 99573,
+        "path": "DAVIS/JPEGImages/480p/car-shadow/00020.jpg",
+        "sha256": "a7ece09dfd002b670feed60b9ab2076c8bad1cd3418e7360246c982457cd1dac"
+      },
+      {
+        "bytes": 2171,
+        "path": "DAVIS/Annotations/480p/car-shadow/00020.png",
+        "sha256": "e933692512f0b1a72b688373c83e9a08671c11a23180eddcb6030efb0f1b0193"
+      },
+      {
+        "bytes": 101608,
+        "path": "DAVIS/JPEGImages/480p/car-shadow/00025.jpg",
+        "sha256": "f0a7893f325f4046e3fffc732ad95a95893c28e8742d08b17c5a03dd6e1264c6"
+      },
+      {
+        "bytes": 2095,
+        "path": "DAVIS/Annotations/480p/car-shadow/00025.png",
+        "sha256": "b827bcd0662d46a2619b577438d497549220eff4e5af05ba57583aa6fe57d152"
+      },
+      {
+        "bytes": 181672,
+        "path": "DAVIS/JPEGImages/480p/cows/00000.jpg",
+        "sha256": "a9354bbee4c9eb396c1a86222406e8f279dc755355d13b9bb93b8c95b15e2c4d"
+      },
+      {
+        "bytes": 3694,
+        "path": "DAVIS/Annotations/480p/cows/00000.png",
+        "sha256": "fcf3712094079d356a939645ae6a2904647d25fde7561bd76e5f5810ca8799ed"
+      },
+      {
+        "bytes": 184650,
+        "path": "DAVIS/JPEGImages/480p/cows/00005.jpg",
+        "sha256": "086b0e247064a969784922d191bc6d5da3262291b6c7612f0b5e9b85c63cfc3d"
+      },
+      {
+        "bytes": 3473,
+        "path": "DAVIS/Annotations/480p/cows/00005.png",
+        "sha256": "72587396d563b398bd39de7445f956019640dcb1f7b94156ee034c04ed726079"
+      },
+      {
+        "bytes": 182036,
+        "path": "DAVIS/JPEGImages/480p/cows/00010.jpg",
+        "sha256": "e11f4ead4d4ab04ae352c23b1a41ba820de0e96ffb353bbbce0261a2541754da"
+      },
+      {
+        "bytes": 3606,
+        "path": "DAVIS/Annotations/480p/cows/00010.png",
+        "sha256": "787bc659d7e14af2876c4d8ef4578ad9a2e11b7db57cf0eee99c86cc5fe7af67"
+      },
+      {
+        "bytes": 182624,
+        "path": "DAVIS/JPEGImages/480p/cows/00015.jpg",
+        "sha256": "f781ad8d4a41fb8a2964849a4c8bf8304e5be2fcfe15b70aba48ac35b17090f7"
+      },
+      {
+        "bytes": 3713,
+        "path": "DAVIS/Annotations/480p/cows/00015.png",
+        "sha256": "0f2b0745bda082457a4acb1a5c5f03c7e4e095200373657ccec439747a1cd746"
+      },
+      {
+        "bytes": 184353,
+        "path": "DAVIS/JPEGImages/480p/cows/00020.jpg",
+        "sha256": "6ef884224f762888504851f83ab5873abd0641251a952695e0bee2b7e81235c3"
+      },
+      {
+        "bytes": 3622,
+        "path": "DAVIS/Annotations/480p/cows/00020.png",
+        "sha256": "e70b062dd0994000b18d13f5c9e262dbfc95819019cfbcbc515c2817f10c6fe9"
+      },
+      {
+        "bytes": 182330,
+        "path": "DAVIS/JPEGImages/480p/cows/00025.jpg",
+        "sha256": "9f8f2e0a6db70f4b3b1c6a66fce7deeec2a660b16dfd9b46693a59e3f4d131ab"
+      },
+      {
+        "bytes": 3492,
+        "path": "DAVIS/Annotations/480p/cows/00025.png",
+        "sha256": "c6e762df3c767b2e35e4008da13742fd807409d048d06831a71a5e36ed6e2817"
+      },
+      {
+        "bytes": 148897,
+        "path": "DAVIS/JPEGImages/480p/dance-twirl/00000.jpg",
+        "sha256": "f708e1cfee79cc2e8855095b9e320ba0bb8d97d7887c9b1f7e8987d4c7035d2d"
+      },
+      {
+        "bytes": 2951,
+        "path": "DAVIS/Annotations/480p/dance-twirl/00000.png",
+        "sha256": "ee77a2abeda51b7f98702dc918e0de0e8ac39d7a3f180cc4d4df33c2fe1efac7"
+      },
+      {
+        "bytes": 141238,
+        "path": "DAVIS/JPEGImages/480p/dance-twirl/00005.jpg",
+        "sha256": "f9cfc7fd8632cddc2ff73b2803ee439f1856170052491a9a431ad7a2e15bc13c"
+      },
+      {
+        "bytes": 2862,
+        "path": "DAVIS/Annotations/480p/dance-twirl/00005.png",
+        "sha256": "c2b92e2a973a472e99a3dff22a88fd2a8dbdcb60aeffa90ab1bf2cc9a60a1ba2"
+      },
+      {
+        "bytes": 123473,
+        "path": "DAVIS/JPEGImages/480p/dance-twirl/00010.jpg",
+        "sha256": "44e997130a5ed7a589e95823df9388adb4b258eed8b986f82bd03e463d4ea2a0"
+      },
+      {
+        "bytes": 2981,
+        "path": "DAVIS/Annotations/480p/dance-twirl/00010.png",
+        "sha256": "cc3f95f7799cd90ea8c4084fd1303d7f360f05e5f2575ebe5e43c371a494a980"
+      },
+      {
+        "bytes": 119871,
+        "path": "DAVIS/JPEGImages/480p/dance-twirl/00015.jpg",
+        "sha256": "983a4721480499354e001ac7df13ceae334fa357ae68c64bda82659b19acad7d"
+      },
+      {
+        "bytes": 3213,
+        "path": "DAVIS/Annotations/480p/dance-twirl/00015.png",
+        "sha256": "d0193cbac2fea3d823ef85ca7540d92642dae6a5f99b157dd8813eef718ab8a0"
+      },
+      {
+        "bytes": 109162,
+        "path": "DAVIS/JPEGImages/480p/dance-twirl/00020.jpg",
+        "sha256": "c50b40a66b02d1d18c1a676fb9f2fa4b137ace813c3b7d4e427a27058bd0892a"
+      },
+      {
+        "bytes": 2884,
+        "path": "DAVIS/Annotations/480p/dance-twirl/00020.png",
+        "sha256": "d4a46e7d10406f861676502623d911469e8188a55fdb2efe1c9198f55676a657"
+      },
+      {
+        "bytes": 106689,
+        "path": "DAVIS/JPEGImages/480p/dance-twirl/00025.jpg",
+        "sha256": "08617dbff82d6b0588bb9550639f2c40f59c01fe8bfa96aa90268b2cc2d26702"
+      },
+      {
+        "bytes": 2895,
+        "path": "DAVIS/Annotations/480p/dance-twirl/00025.png",
+        "sha256": "92c2a5e2a062db35aff69aa4db028f72765257d4eeafb6217a063606283112d9"
+      },
+      {
+        "bytes": 112671,
+        "path": "DAVIS/JPEGImages/480p/dog/00000.jpg",
+        "sha256": "8055f6d7600ba9acd7dba5faa6ac3b1487bcfdc3b4c45e4519d2c0953c8f1bb5"
+      },
+      {
+        "bytes": 3338,
+        "path": "DAVIS/Annotations/480p/dog/00000.png",
+        "sha256": "e13cb32b856f4a2baf2b916ed222f982558b8a0e97f3964872e5b27e76623578"
+      },
+      {
+        "bytes": 107684,
+        "path": "DAVIS/JPEGImages/480p/dog/00005.jpg",
+        "sha256": "1995d0c2118b5d8a32cb378d8885ccac864ce8fad174a285e39ac562321b6c6c"
+      },
+      {
+        "bytes": 3087,
+        "path": "DAVIS/Annotations/480p/dog/00005.png",
+        "sha256": "a8653ecc24801aa574dac3e3a1cabeacf25b6bf1f7b5eb7f4d205dafa78d9b84"
+      },
+      {
+        "bytes": 130441,
+        "path": "DAVIS/JPEGImages/480p/dog/00010.jpg",
+        "sha256": "e3b00b345348b73c67b685c0d6d97edd38360ca79e288fa23e76be84f07e7f39"
+      },
+      {
+        "bytes": 2838,
+        "path": "DAVIS/Annotations/480p/dog/00010.png",
+        "sha256": "53195f416a696bcb9d015cc8a7438def2c7dcc6c36afd9ec72e089338ce1e7f7"
+      },
+      {
+        "bytes": 112735,
+        "path": "DAVIS/JPEGImages/480p/dog/00015.jpg",
+        "sha256": "69a78e891ab5fd2d4833bf9b663c9562ad18ae776ef298bea04c3ed2cb09ff9b"
+      },
+      {
+        "bytes": 2587,
+        "path": "DAVIS/Annotations/480p/dog/00015.png",
+        "sha256": "244b335f77b9005010cb30131e3ec28a65b036ebcfac667398641b1fd00260d4"
+      },
+      {
+        "bytes": 110509,
+        "path": "DAVIS/JPEGImages/480p/dog/00020.jpg",
+        "sha256": "be2c75498ff29e8e16e64d39e52adb9bb5b1f0bedc1ecc2f46570de0107dca53"
+      },
+      {
+        "bytes": 2350,
+        "path": "DAVIS/Annotations/480p/dog/00020.png",
+        "sha256": "2274697da40bde048082fb80ee361fc4aa6aca65e1e85e55a8a382dea8edbcea"
+      },
+      {
+        "bytes": 100486,
+        "path": "DAVIS/JPEGImages/480p/dog/00025.jpg",
+        "sha256": "4fef4ddaaa60627cc70d20ac3b3cbccd895860052fbe40b24dfaf14be46278a9"
+      },
+      {
+        "bytes": 2578,
+        "path": "DAVIS/Annotations/480p/dog/00025.png",
+        "sha256": "15776481737ba0f49b4024e554958144729c675b9a3e62a2fc8bbb680c572d5e"
+      },
+      {
+        "bytes": 110815,
+        "path": "DAVIS/JPEGImages/480p/dogs-jump/00000.jpg",
+        "sha256": "09b22b6d9a11d7fc49ed371766a0fa1185867da755bde04a43db2c80879ef5d1"
+      },
+      {
+        "bytes": 2597,
+        "path": "DAVIS/Annotations/480p/dogs-jump/00000.png",
+        "sha256": "15d56e2bfc46c2d046a9c14f45c39e06b70828488689e8903178489c7d49533e"
+      },
+      {
+        "bytes": 110069,
+        "path": "DAVIS/JPEGImages/480p/dogs-jump/00005.jpg",
+        "sha256": "5fe43fc0b60a764f219552f65ffd12912d935b9d6134d58b3f09e8642740778d"
+      },
+      {
+        "bytes": 2989,
+        "path": "DAVIS/Annotations/480p/dogs-jump/00005.png",
+        "sha256": "c6b76fd323157a3623a0b2f0fe8943046403c01c84c66dd09466fcf1c8a460ff"
+      },
+      {
+        "bytes": 106785,
+        "path": "DAVIS/JPEGImages/480p/dogs-jump/00010.jpg",
+        "sha256": "56cffee9eaf412cce7b0d207dd502676af3bc360b3040b375e020a6040e80ede"
+      },
+      {
+        "bytes": 2832,
+        "path": "DAVIS/Annotations/480p/dogs-jump/00010.png",
+        "sha256": "d8fdf015ce131e8b771d1784b0d9cbc0e33f0e2f0f1b47dff3e42613804f1dbf"
+      },
+      {
+        "bytes": 111060,
+        "path": "DAVIS/JPEGImages/480p/dogs-jump/00015.jpg",
+        "sha256": "83fa7b3718d8fe979f2ef096e91292b069a829363609ba6699fa2ba18826f93d"
+      },
+      {
+        "bytes": 3814,
+        "path": "DAVIS/Annotations/480p/dogs-jump/00015.png",
+        "sha256": "6783cf6e2e287dae92bfd5b7405e6085ddddca34a2aef58d54b23f926abd2616"
+      },
+      {
+        "bytes": 109919,
+        "path": "DAVIS/JPEGImages/480p/dogs-jump/00020.jpg",
+        "sha256": "c71e763bd22663846ced244af88cb268a0183921871fcb3c60034e14c4729d7e"
+      },
+      {
+        "bytes": 3902,
+        "path": "DAVIS/Annotations/480p/dogs-jump/00020.png",
+        "sha256": "a57991a99bfe7299aa7a559405cc6c5992c3a279bd71d4d09afab87676ad07c8"
+      },
+      {
+        "bytes": 108486,
+        "path": "DAVIS/JPEGImages/480p/dogs-jump/00025.jpg",
+        "sha256": "4bc61b0b50959eb120f072045ae1abe8eebc63b5572a65932b2cb9659fc9452b"
+      },
+      {
+        "bytes": 3143,
+        "path": "DAVIS/Annotations/480p/dogs-jump/00025.png",
+        "sha256": "df25f368881ebc8a2874079b3bccabb6dc5c6dc4ab87a8670b9911d9bfdf443c"
+      },
+      {
+        "bytes": 87134,
+        "path": "DAVIS/JPEGImages/480p/drift-chicane/00000.jpg",
+        "sha256": "86518a6d30aba22df5faad2d9b71d6f00eedd2822cd22278a91b144eb5e6f672"
+      },
+      {
+        "bytes": 1447,
+        "path": "DAVIS/Annotations/480p/drift-chicane/00000.png",
+        "sha256": "d2d629e0db91fecc3db3553cd53e9725beeaf4b8fbb5e6b065559a1dd9dc0880"
+      },
+      {
+        "bytes": 91489,
+        "path": "DAVIS/JPEGImages/480p/drift-chicane/00005.jpg",
+        "sha256": "b9d12e86e590e86dbf463bda91f9bc5640562485968be150acdf33a26525d5c6"
+      },
+      {
+        "bytes": 1469,
+        "path": "DAVIS/Annotations/480p/drift-chicane/00005.png",
+        "sha256": "339efc72182aa94d0032195493fd2560ef3461a8e076e446911bc0a0b2c13b98"
+      },
+      {
+        "bytes": 91804,
+        "path": "DAVIS/JPEGImages/480p/drift-chicane/00010.jpg",
+        "sha256": "e636b5ebed35fb37e8360e3c92004b7aca0235d5ae76b825ec126f24b459a75b"
+      },
+      {
+        "bytes": 1483,
+        "path": "DAVIS/Annotations/480p/drift-chicane/00010.png",
+        "sha256": "6ea8088b13db9316e00aed120da9e453107b06b6ba2373f61c11747389d7f712"
+      },
+      {
+        "bytes": 88025,
+        "path": "DAVIS/JPEGImages/480p/drift-chicane/00015.jpg",
+        "sha256": "dcb722cb60cb9ab927cae94dec2c94ad9f17eab77be570c9a5bbfa9b7751db07"
+      },
+      {
+        "bytes": 1519,
+        "path": "DAVIS/Annotations/480p/drift-chicane/00015.png",
+        "sha256": "92caadd6c604cf8cb75053a70fae479df3ba296ab59485421fe63473907665e5"
+      },
+      {
+        "bytes": 85680,
+        "path": "DAVIS/JPEGImages/480p/drift-chicane/00020.jpg",
+        "sha256": "b0d851a074f6239d00d0c74e4bfa54ee9c88301ebcc4e1568f93006ec74ff8ed"
+      },
+      {
+        "bytes": 1540,
+        "path": "DAVIS/Annotations/480p/drift-chicane/00020.png",
+        "sha256": "5751c3fd79ece5506f157204a3f8e89dc42fa77a397ce99a52c268d5e98b7cef"
+      },
+      {
+        "bytes": 86295,
+        "path": "DAVIS/JPEGImages/480p/drift-chicane/00025.jpg",
+        "sha256": "55b1ee0c16fada191185a0989e603f94dfff2bc91a96565a03ff79ce39d39e33"
+      },
+      {
+        "bytes": 1652,
+        "path": "DAVIS/Annotations/480p/drift-chicane/00025.png",
+        "sha256": "27458a5ce94683065066205a55fde52b7ec0194bdf3a9796eae90abd4b8c601d"
+      }
+    ],
+    "protocol_sha256": "c754e01eea0692a799ddbfdc7d432d62b556b0888b2e10ffa416ea9b667d1404",
+    "sequences": [
+      "bike-packing",
+      "blackswan",
+      "bmx-trees",
+      "breakdance",
+      "camel",
+      "car-roundabout",
+      "car-shadow",
+      "cows",
+      "dance-twirl",
+      "dog",
+      "dogs-jump",
+      "drift-chicane"
+    ],
+    "split_sha256": "0d88abafe3dcf142ca51c5a348ec3b98a47b93a8452aa41a8cb6da430fe9eb24"
+  }
+}

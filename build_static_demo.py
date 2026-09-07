@@ -65,6 +65,11 @@ def build_demo(output_dir: Path) -> dict[str, object]:
         json.dumps(report, indent=2, sort_keys=True) + "\n"
     )
     html = render_report_html(report).replace(
+        '<header class="hero">',
+        '<nav aria-label="Project navigation"><a href="evaluation/index.html">'
+        'Real-video evaluation: 36 probes, all failures visible →</a></nav>'
+        '<header class="hero">',
+    ).replace(
         "</main>",
         '<p><a href="evidence.json">Download the canonical evidence JSON</a>'
         ' · <a href="https://github.com/tzh476/opencv-evidence-locker">'

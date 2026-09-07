@@ -86,12 +86,31 @@ HTML escaping in the review UI.
 
 ## 6. Failure modes and limitations
 
+### Independent real-video probe added 2026-09-07
+
+Protocol `evaluation/PROTOCOL.md` was committed before predictions. With detector
+`d09d968` and unchanged thresholds, 36 pairs from the first 12 alphabetically
+sorted DAVIS validation sequences yielded 34 TP and 2 FN against human-annotated
+foreground-occupancy change (94.4% recall). All reference labels happened to be
+positive; there is no real-negative denominator and no real false-positive-rate
+claim. This is a foreground-change proxy, not an official DAVIS score or semantic
+incident accuracy. Frame-pair probes reset hysteresis; samples within sequences
+are correlated. Both misses occur in `drift-chicane` (0→5 and 20→25).
+
+Separate constructed controls yielded 0/12 triggers for exact repeats, 0/12 for
+seeded ±2 noise, and 12/12 for +40 brightness with unchanged geometry. Lighting
+sensitivity is therefore measured, not hypothetical. Original frames remain
+local; the public explorer shows attributed CC-BY DAVIS annotation diagrams and
+all per-pair predictions. Source hashes and the sealed result are downloadable at
+https://tzh476.github.io/opencv-evidence-locker/evaluation/ .
+
 - Change detection is not object recognition, identity verification, intent
   inference, or anomaly detection in a safety-critical sense.
 - Thresholds and minimum region area are content-dependent; subtle visual
   changes can be missed and illumination/camera movement can trigger events.
-- The synthetic four-case suite is deliberately small. A final entry needs a
-  right-cleared, held-out evaluation set and reported precision/recall tradeoffs.
+- Both the four-case synthetic suite and 12-sequence real-video proxy are small.
+  Natural negative videos and independently labeled operational outcomes are
+  still needed before a production precision/recall claim.
 - The system stores frame hashes and overlays for review; an approved deployment
   must define retention, sample licensing, and access controls before accepting
   user-provided media.
@@ -130,4 +149,6 @@ IAM roles. The project intentionally leaves no persistent write endpoint.
 - [x] Judge-accessible read-only endpoint and public source package.
 - [x] Applicant-reviewed video, project-page declarations, terms, and final
   submission.
-- [ ] Larger right-cleared held-out evaluation and cold-start optimization.
+- [x] Frozen 12-sequence real-video probe, separate nuisance controls, all failures
+  exposed in the public evaluation explorer.
+- [ ] Natural negative-video evaluation and a second live cold-start measurement.

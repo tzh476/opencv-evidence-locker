@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import json
 
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_LEFT
@@ -97,7 +98,7 @@ def page_base(canvas: Canvas, page: int, label: str, accent=MINT) -> None:
     canvas.setFillColor(MUTED)
     canvas.setFont(FONT, 6.5)
     canvas.drawString(18 * mm, 10 * mm, "OpenCV 5 · deterministic evidence · bounded agent action")
-    canvas.drawRightString(PAGE_W - 18 * mm, 10 * mm, f"{page:02d} / 07")
+    canvas.drawRightString(PAGE_W - 18 * mm, 10 * mm, f"{page:02d} / 08")
 
 
 def heading(canvas: Canvas, eyebrow: str, title: str, *, accent=MINT, y: float = PAGE_H - 42 * mm) -> float:
@@ -153,7 +154,7 @@ def draw_cover(canvas: Canvas) -> None:
 
     top = 72 * mm
     card(canvas, 18 * mm, top, 174 * mm, 42 * mm, stroke=MINT)
-    metric(canvas, 25 * mm, top + 25 * mm, "32 / 32", "local tests passed", accent=MINT)
+    metric(canvas, 25 * mm, top + 25 * mm, "38 / 38", "local tests passed", accent=MINT)
     metric(canvas, 78 * mm, top + 25 * mm, "2 TP · 2 TN", "seeded smoke evaluation", accent=BLUE)
     metric(canvas, 139 * mm, top + 25 * mm, "SHA-256", "canonical evidence receipt", accent=colors.HexColor("#C39BFF"))
 
@@ -389,7 +390,7 @@ def draw_close(canvas: Canvas) -> None:
     limits = [
         "Change detection is not object recognition, identity verification, intent inference, or a safety-critical anomaly detector.",
         "Thresholds are content-dependent; subtle changes can be missed and camera motion or illumination can trigger events.",
-        "The four-case suite is deliberately smoke-sized. Production use needs a right-cleared, held-out evaluation set.",
+        "The 12-sequence foreground-change proxy (page 8) lacks natural negative videos. Production precision remains unproven.",
         "Hashes prove byte-level integrity, not the real-world meaning of a scene.",
         "Material transitions route to human approval; the agent cannot authorize irreversible actions.",
     ]
@@ -431,11 +432,33 @@ def build() -> Path:
     canvas = Canvas(str(OUT), pagesize=A4, pageCompression=1)
     canvas.setTitle("Evidence Locker — OpenCV 5 Agentic Vision Technical Report")
     canvas.setAuthor("tzh476")
-    for draw in (draw_cover, draw_system, draw_opencv, draw_policy, draw_evaluation, draw_aws, draw_close):
+    for draw in (draw_cover, draw_system, draw_opencv, draw_policy, draw_evaluation, draw_aws, draw_close, draw_heldout):
         draw(canvas)
         canvas.showPage()
     canvas.save()
     return OUT
+
+
+def draw_heldout(canvas: Canvas) -> None:
+    page_base(canvas, 8, "Independent evaluation · 2026-09-07", BLUE)
+    y = heading(canvas, "FROZEN REAL-VIDEO PROBE", "Real samples.\nVisible failures.", accent=BLUE)
+    paragraph(canvas, "12 previously unused DAVIS validation sequences; three fixed frame pairs each. Protocol committed before predictions. Detector d09d968 and thresholds unchanged.", 18 * mm, y, 170 * mm, size=10)
+    report = json.loads((ROOT / "docs/evaluation/results.json").read_text())
+    values = report["real_pairs"]
+    metric(canvas, 18 * mm, 169 * mm, f"{values['TP']} / {values['TP'] + values['FN']}", "positive changes detected", accent=MINT)
+    metric(canvas, 82 * mm, 169 * mm, f"{values['FN']} missed", "both in drift-chicane", accent=AMBER)
+    metric(canvas, 142 * mm, 169 * mm, "0 negatives", "real FPR not estimated", accent=BLUE)
+    y = paragraph(canvas, "Reference: human foreground-mask occupancy XOR >=0.5% of pixels. Recall is 94.4% on this proxy; all 36 references are positive. This is not semantic incident accuracy or an official DAVIS score. Pairs within one sequence are correlated; hysteresis resets per pair.", 18 * mm, 145 * mm, 172 * mm, size=10)
+    y -= 6 * mm
+    y = paragraph(canvas, "Separate constructed controls: exact repeats 0/12 nuisance triggers; seeded +/-2 noise 0/12; +40 brightness 12/12. The detector is sensitive to light changes even when foreground geometry stays fixed.", 18 * mm, y, 172 * mm, size=10, color=AMBER)
+    y -= 6 * mm
+    y = paragraph(canvas, "Both misses remain published: drift-chicane frames 0 to 5 and 20 to 25. The online explorer exposes every prediction, independent annotation diagrams, source hashes, and a sealed JSON report. Two local runs produced identical artifacts.", 18 * mm, y, 172 * mm, size=10)
+    y -= 6 * mm
+    paragraph(canvas, "Source: DAVIS 2017 (Pont-Tuset et al., arXiv:1704.00675; Perazzi et al., CVPR 2016). Annotation diagrams are adapted under CC BY 4.0 with attribution. Original camera pixels are not redistributed. Natural negative videos and operational labels remain future work.", 18 * mm, y, 172 * mm, size=8)
+    canvas.setFont(FONT_BOLD, 9)
+    canvas.setFillColor(MINT)
+    canvas.drawString(18 * mm, 31 * mm, "tzh476.github.io/opencv-evidence-locker/evaluation/")
+    canvas.linkURL("https://tzh476.github.io/opencv-evidence-locker/evaluation/", (18 * mm, 28 * mm, 190 * mm, 38 * mm), relative=0)
 
 
 if __name__ == "__main__":
